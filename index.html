@@ -7,11 +7,11 @@
     <style>
         :root {
             /* 配色：墨水与羊皮纸 */
-            --primary: #292524; /* 墨黑色 */
+            --primary: #292524; 
             --primary-light: #44403c;
-            --accent: #9f1239; /* 凝血/暗红墨水 */
+            --accent: #9f1239; 
             --accent-fade: rgba(159, 18, 57, 0.15);
-            --bg-base: #f4ecd8; /* 羊皮纸基底色 */
+            --bg-base: #f4ecd8; 
             --text-main: #292524;
             --text-sub: #57534e;
             --border: #d6d3d1;
@@ -30,7 +30,6 @@
             padding: 0;
             font-family: var(--font-serif);
             background-color: var(--bg-base);
-            /* 复合背景：暗角渐变 + 羊皮纸粗糙噪点纹理 */
             background-image: 
                 radial-gradient(circle at center, transparent 20%, rgba(139, 69, 19, 0.15) 85%, rgba(90, 40, 10, 0.3) 100%),
                 url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
@@ -43,7 +42,6 @@
             width: 100%;
             max-width: 520px;
             min-height: 100vh;
-            /* 容器采用微透的纸张颜色，融合阴影形成立体感 */
             background: rgba(250, 246, 235, 0.88);
             backdrop-filter: blur(4px);
             position: relative;
@@ -55,14 +53,14 @@
             border-right: 1px solid rgba(139, 69, 19, 0.15);
         }
 
-        /* 动画定义 */
+        /* 动画 */
         .fade-in { animation: fadeIn 0.8s ease-out forwards; }
         .slide-up { animation: slideUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
         @keyframes pulse { 0% { transform: scale(1) rotate(45deg); opacity:0.3; } 50% { transform: scale(1.1) rotate(45deg); opacity:0.8; } 100% { transform: scale(1) rotate(45deg); opacity:0.3; } }
 
-        /* ---------------- 封面 ---------------- */
+        /* --- 封面 --- */
         #page-intro {
             padding: 50px 30px;
             display: flex;
@@ -73,248 +71,91 @@
             text-align: center;
             position: relative;
             overflow: hidden;
-            background: rgba(28, 25, 23, 0.95); /* 封面更深邃的墨黑色 */
-            color: #f4ecd8;
-        }
-
-        .intro-icon {
-            font-size: 50px;
-            margin-bottom: 20px;
-            color: var(--accent);
-        }
-
-        .intro-title {
-            font-size: 34px;
-            margin: 0 0 15px;
-            font-weight: normal;
-            letter-spacing: 4px;
-            line-height: 1.4;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
-        }
-        .intro-sub {
-            font-size: 14px;
-            color: #d6d3d1;
-            line-height: 2;
-            margin-bottom: 50px;
-            font-family: var(--font-sans);
-            letter-spacing: 1px;
-        }
-
-        .btn-start {
-            background: transparent;
-            color: var(--accent);
-            border: 1px solid var(--accent);
-            padding: 16px 40px;
-            font-size: 16px;
-            font-family: var(--font-serif);
-            letter-spacing: 4px;
-            cursor: pointer;
-            border-radius: 0px;
-            transition: all 0.3s;
-            position: relative;
-            text-transform: uppercase;
-            box-shadow: inset 0 0 0 0 var(--accent);
-        }
-        .btn-start:hover { 
-            color: #fff; 
-            box-shadow: inset 0 0 0 40px var(--accent);
-        }
-        .btn-start:active { transform: scale(0.96); }
-
-        /* ---------------- 测试页 ---------------- */
-        #page-test {
-            display: none;
-            flex-direction: column;
-            padding: 30px 24px;
-            min-height: 100vh;
-        }
-
-        .status-bar {
-            display: flex;
-            justify-content: space-between;
-            font-size: 13px;
-            color: var(--text-sub);
-            margin-bottom: 15px;
-            font-family: var(--font-sans);
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        .progress-container {
-            width: 100%;
-            height: 1px;
-            background: #d6d3d1;
-            margin-bottom: 40px;
-            position: relative;
-        }
-        .progress-fill {
-            height: 100%;
-            background: var(--accent);
-            width: 0%;
-            transition: width 0.4s ease;
-            box-shadow: 0 0 10px var(--accent);
-        }
-
-        .q-content { flex: 1; display: flex; flex-direction: column; }
-
-        .q-text {
-            font-size: 18.5px;
-            line-height: 1.7;
-            margin-bottom: 35px;
-            color: var(--primary);
-            min-height: 80px;
-            text-align: justify;
-            font-weight: bold;
-        }
-
-        .options-list { display: flex; flex-direction: column; gap: 14px; }
-
-        .opt-btn {
-            background: rgba(255, 255, 255, 0.4);
-            border: 1px solid rgba(139, 69, 19, 0.2);
-            padding: 16px 20px;
-            font-size: 15px;
-            color: var(--text-main);
-            cursor: pointer;
-            text-align: left;
-            transition: all 0.2s;
-            line-height: 1.6;
-            position: relative;
-            overflow: hidden;
-            font-family: var(--font-serif);
-        }
-        .opt-btn:hover { 
-            border-color: var(--accent); 
-            background: rgba(245, 235, 220, 0.8); 
-            transform: translateX(4px); 
-        }
-        .opt-btn:active { transform: scale(0.99); }
-
-        .nav-btns {
-            margin-top: auto;
-            padding-top: 30px;
-            padding-bottom: 20px;
-            display: flex;
-            justify-content: center;
-        }
-        .btn-back {
-            background: none; border: none;
-            color: #a8a29e;
-            font-size: 13px;
-            cursor: pointer;
-            text-decoration: underline;
-            font-family: var(--font-sans);
-        }
-
-        /* ---------------- 结果页 ---------------- */
-        #page-result {
-            display: none;
-            background: transparent;
-            min-height: 100vh;
-            padding-bottom: 60px;
-        }
-
-        .res-header {
             background: rgba(28, 25, 23, 0.95);
             color: #f4ecd8;
-            padding: 60px 30px 50px;
-            text-align: center;
-            border-bottom: 4px solid var(--accent);
         }
+        .intro-icon { font-size: 50px; margin-bottom: 20px; color: var(--accent); }
+        .intro-title { font-size: 34px; margin: 0 0 15px; font-weight: normal; letter-spacing: 4px; line-height: 1.4; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+        .intro-sub { font-size: 14px; color: #d6d3d1; line-height: 2; margin-bottom: 50px; font-family: var(--font-sans); letter-spacing: 1px; }
 
-        .res-en-name {
-            font-family: var(--font-sans);
-            font-size: 12px;
-            letter-spacing: 4px;
-            color: #a8a29e;
-            text-transform: uppercase;
-            margin-bottom: 10px;
+        .btn-start {
+            background: transparent; color: var(--accent); border: 1px solid var(--accent);
+            padding: 16px 40px; font-size: 16px; font-family: var(--font-serif); letter-spacing: 4px;
+            cursor: pointer; transition: all 0.3s; position: relative; text-transform: uppercase;
+            box-shadow: inset 0 0 0 0 var(--accent);
         }
+        .btn-start:hover { color: #fff; box-shadow: inset 0 0 0 40px var(--accent); }
+        .btn-start:active { transform: scale(0.96); }
 
+        /* --- 测试页 --- */
+        #page-test { display: none; flex-direction: column; padding: 30px 24px; min-height: 100vh; }
+        .status-bar { display: flex; justify-content: space-between; font-size: 13px; color: var(--text-sub); margin-bottom: 15px; font-family: var(--font-sans); letter-spacing: 1px; text-transform: uppercase; }
+        .progress-container { width: 100%; height: 1px; background: #d6d3d1; margin-bottom: 40px; position: relative; }
+        .progress-fill { height: 100%; background: var(--accent); width: 0%; transition: width 0.4s ease; box-shadow: 0 0 10px var(--accent); }
+        
+        .q-content { flex: 1; display: flex; flex-direction: column; }
+        .q-text { font-size: 17.5px; line-height: 1.8; margin-bottom: 35px; color: var(--primary); min-height: 80px; text-align: justify; font-weight: bold; }
+        .options-list { display: flex; flex-direction: column; gap: 14px; }
+        .opt-btn {
+            background: rgba(255, 255, 255, 0.4); border: 1px solid rgba(139, 69, 19, 0.2);
+            padding: 16px 20px; font-size: 15px; color: var(--text-main); cursor: pointer; text-align: left;
+            transition: all 0.2s; line-height: 1.6; position: relative; font-family: var(--font-serif);
+        }
+        .opt-btn:hover { border-color: var(--accent); background: rgba(245, 235, 220, 0.8); transform: translateX(4px); }
+        .opt-btn:active { transform: scale(0.99); }
+
+        .nav-btns { margin-top: auto; padding-top: 30px; padding-bottom: 20px; display: flex; justify-content: center; }
+        .btn-back { background: none; border: none; color: #a8a29e; font-size: 13px; cursor: pointer; text-decoration: underline; font-family: var(--font-sans); }
+
+        /* --- 结果页 --- */
+        #page-result { display: none; background: transparent; min-height: 100vh; padding-bottom: 60px; }
+        .res-header { background: rgba(28, 25, 23, 0.95); color: #f4ecd8; padding: 60px 30px 40px; text-align: center; border-bottom: 4px solid var(--accent); }
+        .res-en-name { font-family: var(--font-sans); font-size: 12px; letter-spacing: 4px; color: #a8a29e; text-transform: uppercase; margin-bottom: 10px; }
         .res-title { font-size: 32px; margin: 0 0 10px; letter-spacing: 2px; }
-        .res-subtitle { font-size: 18px; color: var(--accent); font-style: italic; margin-bottom: 25px; }
+        .res-subtitle { font-size: 17px; color: var(--accent); font-style: italic; margin-bottom: 20px; }
+        
+        .sim-badge {
+            display: inline-block; background: rgba(159, 18, 57, 0.2); border: 1px solid var(--accent);
+            padding: 6px 15px; font-size: 12px; font-family: var(--font-sans); letter-spacing: 1px;
+            color: #f4ecd8; margin-bottom: 25px; border-radius: 20px;
+        }
 
         .card {
-            background: rgba(255, 255, 255, 0.6);
-            margin: 30px 20px 0;
-            padding: 30px 25px;
-            border: 1px solid rgba(139, 69, 19, 0.2);
-            position: relative;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            background: rgba(255, 255, 255, 0.6); margin: 30px 20px 0; padding: 30px 25px;
+            border: 1px solid rgba(139, 69, 19, 0.2); position: relative; box-shadow: 0 4px 15px rgba(0,0,0,0.03);
         }
-        .card::before {
-            content: ''; position: absolute; top: 3px; left: 3px; right: -4px; bottom: -4px;
-            border: 1px solid rgba(139, 69, 19, 0.15); z-index: -1;
-        }
-
-        .card-title {
-            font-size: 16px;
-            text-align: center;
-            margin-bottom: 20px;
-            font-weight: bold;
-            color: var(--primary);
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            display: flex; align-items: center; justify-content: center; gap: 10px;
-        }
-        .card-title::before, .card-title::after {
-            content: ''; height: 1px; width: 30px; background: var(--accent);
-        }
+        .card::before { content: ''; position: absolute; top: 3px; left: 3px; right: -4px; bottom: -4px; border: 1px solid rgba(139, 69, 19, 0.15); z-index: -1; }
+        .card-title { font-size: 16px; text-align: center; margin-bottom: 20px; font-weight: bold; color: var(--primary); letter-spacing: 2px; display: flex; align-items: center; justify-content: center; gap: 10px; }
+        .card-title::before, .card-title::after { content: ''; height: 1px; width: 30px; background: var(--accent); }
 
         .desc-text { font-size: 15px; line-height: 2; color: #292524; text-align: justify; }
-        
         .lore-section { margin-bottom: 22px; }
         .lore-label { font-size: 13.5px; color: var(--accent); font-weight: bold; margin-bottom: 8px; }
         .lore-text { font-size: 14.5px; line-height: 1.8; color: #44403c; text-align: justify; }
+        .quote-box { background: rgba(245, 235, 220, 0.5); border-left: 3px solid var(--accent); padding: 15px 20px; margin: 20px 0; font-style: italic; font-size: 14.5px; color: #44403c; line-height: 1.7; }
         
-        .quote-box {
-            background: rgba(245, 235, 220, 0.5);
-            border-left: 3px solid var(--accent);
-            padding: 15px 20px;
-            margin: 20px 0;
-            font-style: italic;
-            font-size: 14.5px;
-            color: #44403c;
-            line-height: 1.7;
-        }
-
-        .recs-box {
-            background: rgba(28, 25, 23, 0.95);
-            color: #e7e5e4;
-            padding: 22px;
-            font-size: 14px;
-            line-height: 1.8;
-            margin-top: 25px;
-            border: 1px solid #44403c;
-        }
+        .recs-box { background: rgba(28, 25, 23, 0.95); color: #e7e5e4; padding: 22px; font-size: 14px; line-height: 1.8; margin-top: 25px; border: 1px solid #44403c; }
         .recs-box .lore-label { color: #fda4af; }
+        .recs-box .lore-text { color: #f5f5f5 !important; }
 
         /* Loading */
-        #page-loading {
-            display: none; height: 100vh; flex-direction: column; justify-content: center; align-items: center;
-            background: rgba(28, 25, 23, 0.98); color: #f4ecd8;
-        }
-        .diamond {
-            width: 30px; height: 30px; border: 2px solid var(--accent);
-            animation: pulse 1.5s infinite ease-in-out;
-        }
+        #page-loading { display: none; height: 100vh; flex-direction: column; justify-content: center; align-items: center; background: rgba(28, 25, 23, 0.98); color: #f4ecd8; }
+        .diamond { width: 30px; height: 30px; border: 2px solid var(--accent); animation: pulse 1.5s infinite ease-in-out; }
     </style>
 </head>
 <body>
 
-<!-- 1. 封面 -->
 <div id="page-intro" class="container">
     <div class="intro-icon">🖋️</div>
     <h1 class="intro-title">文学人格<br>化身测试</h1>
     <p class="intro-sub">
         构思一部作品，照见你的灵魂底色。<br><br>
-        十六重文学结界 · 寻找与你共振的巨匠。<br>
+        六大创作维度 · 定位你的专属座标。<br>
         现在，请以造物主的身份，开始执笔。
     </p>
     <button class="btn-start" onclick="startTest()">开始构思</button>
 </div>
 
-<!-- 2. 测试页 -->
 <div id="page-test" class="container">
     <div class="status-bar">
         <span>The Manuscript</span>
@@ -323,63 +164,55 @@
     <div class="progress-container">
         <div class="progress-fill" id="progress-bar"></div>
     </div>
-
     <div class="q-content" id="q-box">
-        <div class="q-text" id="q-text">加载中...</div>
+        <div class="q-text" id="q-text"></div>
         <div class="options-list" id="opt-list"></div>
     </div>
-
     <div class="nav-btns">
         <button class="btn-back" id="btn-back" onclick="prevQ()">撤销上一处构思</button>
     </div>
 </div>
 
-<!-- 3. Loading -->
 <div id="page-loading" class="container">
     <div class="diamond"></div>
-    <p style="margin-top:40px; letter-spacing:4px; font-size: 13px; color: #a8a29e; font-family: sans-serif;">墨水晕染中...</p>
+    <p style="margin-top:40px; letter-spacing:4px; font-size: 13px; color: #a8a29e; font-family: sans-serif;">手稿解析中...</p>
 </div>
 
-<!-- 4. 结果页 -->
 <div id="page-result" class="container">
     <div class="res-header fade-in">
         <div class="res-en-name" id="res-en-name">...</div>
         <h2 class="res-title" id="res-name">...</h2>
         <div class="res-subtitle" id="res-title">...</div>
-        <button class="btn-start" style="font-size:12px; padding:10px 25px; margin-top: 10px; border-color: rgba(255,255,255,0.3); color: #f4ecd8;" onclick="location.reload()">重新执笔</button>
+        <div class="sim-badge" id="res-sim">...</div>
+        <br>
+        <button class="btn-start" style="font-size:12px; padding:10px 25px; border-color: rgba(255,255,255,0.3); color: #f4ecd8;" onclick="location.reload()">重新执笔</button>
     </div>
 
-    <!-- 雷达图 -->
+    <!-- 12角星芒雷达图 -->
     <div class="card fade-in" style="animation-delay: 0.1s;">
-        <div class="card-title">创作雷达图</div>
-        <canvas id="radarChart" width="300" height="280" style="width:100%; display:block; margin: 0 auto;"></canvas>
+        <div class="card-title">六维坐标系</div>
+        <canvas id="radarChart" width="300" height="340" style="width:100%; display:block; margin: 0 auto;"></canvas>
     </div>
 
-    <!-- 判词 -->
     <div class="card fade-in" style="animation-delay: 0.2s;">
         <div class="card-title">作家侧写</div>
         <div class="desc-text" id="res-desc"></div>
     </div>
     
-    <!-- 灵魂手稿 -->
     <div class="card fade-in" style="animation-delay: 0.3s; margin-bottom: 40px;">
         <div class="card-title">灵魂手稿</div>
-        
         <div class="lore-section">
-            <div class="lore-label">▍ 作者生平与逸闻</div>
+            <div class="lore-label">▍ 档案生平</div>
             <div class="lore-text" id="res-bio"></div>
         </div>
-
         <div class="lore-section">
             <div class="lore-label">▍ 文学内核</div>
             <div class="lore-text" id="res-core"></div>
         </div>
-
         <div class="lore-section" style="margin-top: 15px;">
-            <div class="lore-label">▍ 经典名言</div>
+            <div class="lore-label">▍ 经典摘录</div>
             <div class="quote-box" id="res-quote"></div>
         </div>
-
         <div class="recs-box">
             <div class="lore-label">▍ 创作滋养推荐</div>
             <div class="lore-text" id="res-recs" style="font-family: sans-serif;"></div>
@@ -389,325 +222,375 @@
 
 <script>
 /**
- * 4个维度，共24题 
- * Dim 0: 现实(R, >0) vs 魔幻(S, <=0) 
- * Dim 1: 群像(C, >0) vs 个体(I, <=0) 
- * Dim 2: 悲悯(T, >0) vs 戏谑(P, <=0) 
- * Dim 3: 秩序(O, >0) vs 碎片(X, <=0) 
+ * 六大维度 (Dim 0 到 5)
+ * 0: 视野 (0=群像/宏大, 1=个体/私密)
+ * 1: 世界观 (0=经验现实, 1=超越现实)
+ * 2: 姿态 (0=悲悯共情, 1=冷峻旁观)
+ * 3: 结构 (0=严密秩序, 1=碎片游离)
+ * 4: 语言 (0=繁密修辞, 1=极简白描)
+ * 5: 意义 (0=价值建构, 1=意义解构)
  */
-
 const questions = [
-    // --- 维度0：现实 vs 魔幻 (R vs S) ---
-    { text: "1. 你正在构思小说的第一场戏。主角看向窗外，你打算让他看到什么？", dim: 0, opts: [
-        { t: "长街泥泞，灰头土脸的贩卒正为几文钱爆发着粗粝的争吵。", v: 0.5 },
-        { t: "一场连绵的阴雨，雨丝与主角心底无法言说的晦暗秘密悄然重叠。", v: 0.24 },
-        { t: "一只流浪猫走过落雪的窗台，定睛一看，雪地上留下的却是鸟的爪印。", v: -0.26 },
-        { t: "两轮诡异的巨月同时升空，照彻了一座完全由玻璃折射而成的海市蜃楼。", v: -0.5 }
+    // 维度0：视野
+    { text: "1. 小说的第一场戏，主角正看向窗外，你打算让他看到什么？", dim: 0, opts: [
+        { t: "县城客运站，背着大包小包、神色匆匆的赶路人群。", v: 0 },
+        { t: "老旧家属院里，几家人的饭菜香与闲谈交织的世俗画面。", v: 0.33 },
+        { t: "逼仄的房间窗外，除了灰蒙蒙的天空，只有他自己疲惫的倒影。", v: 0.66 },
+        { t: "深夜空旷的街头，这是他独自走在路灯下，开启内心独白的时刻。", v: 1 }
     ]},
-    { text: "2. 为了推动剧情，主角必须发现一个惊人的秘密。你会把这个秘密藏在哪里？", dim: 0, opts: [
-        { t: "压在市政厅保险柜最底层，一叠满是涂改痕迹的陈年旧账本里。", v: 0.5 },
-        { t: "母亲离世前留下的旧抽屉里，夹在一本日记被泪水晕染的折页处。", v: 0.24 },
-        { t: "在一面满是铜绿的古镜里——他在镜中，看见了一个自己从未涉足的房间。", v: -0.26 },
-        { t: "午夜时分，死去的先祖化作一只盘旋的夜鸟，落在窗棂上亲口向他低语真相。", v: -0.5 }
+    { text: "2. 主角与多年未见的老友重逢，两人之间最可能爆发的冲突点是？", dim: 0, opts: [
+        { t: "阶层分化与时代际遇带来的观念分歧。", v: 0 },
+        { t: "家族关系与社会人情网络中的利益牵扯。", v: 0.33 },
+        { t: "过去一段未曾解开的私密情感心结。", v: 0.66 },
+        { t: "彼此在精神世界和自我认同上的渐行渐远。", v: 1 }
     ]},
-    { text: "3. 主角正在躲避追杀，他逃入了一片幽深的森林。这片森林会作何反应？", dim: 0, opts: [
-        { t: "森林默然不语。只有泥沼在无情地吞没他的脚踝，荆棘残忍地撕裂他的皮肉。", v: 0.5 },
-        { t: "浓雾与婆娑的树影成了恐惧的放大镜，每一丝风吹草动都让他几近崩溃。", v: 0.24 },
-        { t: "森林活像一座恶意的迷宫。只要他一回头，来时的来路便已悄然重组。", v: -0.26 },
-        { t: "古木垂下藤蔓将他温柔藏匿，用非人的低语唤起大雾，将追兵永远留在了此地。", v: -0.5 }
+    { text: "3. 你在构思中写到了一场老同学聚会。这场戏的主要作用是？", dim: 0, opts: [
+        { t: "展现岁月变迁下，这群人命运的巨大分化与沉浮。", v: 0 },
+        { t: "交代复杂的人情世故，推动某些现实利益的交锋。", v: 0.33 },
+        { t: "借众人的喧闹，衬托主角内心的不适与疏离感。", v: 0.66 },
+        { t: "引发主角对个人青春与时间流逝的内向追溯。", v: 1 }
     ]},
-    { text: "4. 关于小说“世界观的奠基”，你的底层逻辑更偏向于？", dim: 0, opts: [
-        { t: "像人类学家一样，精准描摹特定时代的生产方式、物价、气候与社会习俗。", v: 1 },
-        { t: "立足于真实的社会环境，但更侧重提取能反映人物心理状态的环境细节。", v: 0.51 },
-        { t: "构建一个看似正常的现代社会，但暗藏着一套极其荒谬、压抑且无法解释的隐秘规则。", v: -0.49 },
-        { t: "直接打破物理定律，让死者复活、天降花雨，用神话般的奇观来隐喻现实。", v: -1 }
-    ]},
-    { text: "5. 大结局时，主角终于推开了那扇他苦苦寻找的“禁忌之门”。门后是什么？", dim: 0, opts: [
-        { t: "毫无奇迹。满地只散落着几份泛黄的契约，证明他一生的苦难不过是他人权力的筹码。", v: 0.5 },
-        { t: "一个布置得与他童年卧室毫无二致的房间，迫使他避无可避地直面内心最深的创伤。", v: 0.24 },
-        { t: "一条深不见底、呈螺旋状向下的无限阶梯，嘲笑着他这趟旅程本身就是一场荒唐的徒劳。", v: -0.26 },
-        { t: "一颗悬浮在半空的浩瀚水晶球，球内微缩着一个宇宙，他看见里面的自己正在推开同一扇门。", v: -0.5 }
-    ]},
-    { text: "6. 你希望读者在读完你的小说后，对“世界的真相”产生怎样的认知？", dim: 0, opts: [
-        { t: "“原来社会运行的底层逻辑和利益驱动是如此残酷且精密。”", v: 1 },
-        { t: "“人性的复杂与幽暗，远超简单的善恶二元对立。”", v: 0.51 },
-        { t: "“所谓的日常理性和秩序，不过是掩盖荒谬深渊的一层薄纸。”", v: -0.49 },
-        { t: "“世界的本质是神秘的、不可解的，万物皆有灵且充满隐喻。”", v: -1 }
+    { text: "4. 小说的最后一章，主角的生活状态是怎样的？", dim: 0, opts: [
+        { t: "重新汇入人群，带着环境的烙印继续生活。", v: 0 },
+        { t: "回归庸常的琐事，日子在平淡中维系。", v: 0.33 },
+        { t: "离开原有环境，去往一个陌生的地方重新开始。", v: 0.66 },
+        { t: "留在原地，但在精神上已经建立起一道自洽的边界。", v: 1 }
     ]},
 
-    // --- 维度1：群像 vs 个体 (C vs I) ---
-    { text: "7. 主角第一次在小说中登场，你打算安排他在做什么？", dim: 1, opts: [
-        { t: "正被裹挟在愤怒的罢工人群中，在黑压压的街头与镇压者发生着肢体冲突。", v: 0.5 },
-        { t: "正拘谨地坐在一张暗流涌动的家族餐桌前，听着长辈们话里有话的互相试探。", v: 0.24 },
-        { t: "独自坐在喧嚣酒馆的最暗处，看着周遭狂欢的宾客，内心只有一种几近窒息的疏离感。", v: -0.26 },
-        { t: "将自己反锁在漆黑的房间里，死死盯着镜中的自己，怀疑“我”是否真的存在。", v: -0.5 }
+    // 维度1：世界观
+    { text: "5. 小说的故事发生在一个偏远的村镇。这里的日常是怎样的？", dim: 1, opts: [
+        { t: "遵循严格的农耕时令与经济规律，注重真实的细节推敲。", v: 0 },
+        { t: "基本写实，但在特定事件中，带有浓厚的地方风俗色彩。", v: 0.33 },
+        { t: "村民们对一些无法用常理完全解释的古老传说保持着敬畏。", v: 0.66 },
+        { t: "偶尔会发生几件轻微违背物理常识的奇闻异事。", v: 1 }
     ]},
-    { text: "8. 你需要描写一场热闹的晚宴。你的“文学摄影机”会把镜头对准哪里？", dim: 1, opts: [
-        { t: "长镜头扫过全场，从上流贵妇的珠宝，一路摇摄到后厨帮佣粗糙的双手与麻木的神情。", v: 0.5 },
-        { t: "穿梭于宾客们的杯盘交错之间，精准捕捉那些虚伪的客套、微妙的眼神试探与暗流涌动。", v: 0.24 },
-        { t: "焦点完全锁定主角。周遭的推杯换盏渐渐化为失真的白噪音，唯有他的呼吸声震耳欲聋。", v: -0.26 },
-        { t: "华丽的宴会厅开始如水波般消融。镜头直接坠入主角的意识深处，那里正下着一场无声的大雪。", v: -0.5 }
+    { text: "6. 主角在整理杂物时，翻出了一本陈旧的地方志。他从中看到了什么？", dim: 1, opts: [
+        { t: "详实的户籍与土地变革记录，印证了某段历史。", v: 0 },
+        { t: "前人留下的、带有强烈主观情绪的日记批注。", v: 0.33 },
+        { t: "一段关于当地某处风水异象的隐晦记载。", v: 0.66 },
+        { t: "书页里记录的某个老故事，似乎正在他的生活中重演。", v: 1 }
     ]},
-    { text: "9. 在构思一部长篇大作时，你通常会最先在脑海中确立什么？", dim: 1, opts: [
-        { t: "一幅庞大的社会关系网，涉及政客、商人、底层的多阶层全景图。", v: 1 },
-        { t: "一个特定家族的三代兴衰，或是一个小镇上错综复杂的熟人社会。", v: 0.51 },
-        { t: "一个与周围环境格格不入、怀揣着特殊执念的孤独个体。", v: -0.49 },
-        { t: "一种极其私密、难以名状的内心体验或精神危机，人物只是这种体验的载体。", v: -1 }
+    { text: "7. 你要为小说构思一场连绵的雨。这场雨会给故事带来什么？", dim: 1, opts: [
+        { t: "阻断了交通，导致作物减产，让主角的处境更加艰难。", v: 0 },
+        { t: "渲染了一种挥之不去的阴郁情绪，压迫着人物的防线。", v: 0.33 },
+        { t: "伴随着雨水，主角脑海中一些被遗忘的幻象重新浮现。", v: 0.66 },
+        { t: "雨水在某个时刻呈现出异样质感，预示着常规生活的偏离。", v: 1 }
     ]},
-    { text: "10. 当你的主角流下眼泪、彻底崩溃时，压垮他的最后一根稻草通常是？", dim: 1, opts: [
-        { t: "眼睁睁看着自己半生心血，被庞大、冰冷的体制机器像碾死一只蚂蚁般轻易碾碎。", v: 0.5 },
-        { t: "在极度的疲惫中他突然意识到，即便耗尽心血，也永远无法越过亲密关系中那道理解的鸿沟。", v: 0.24 },
-        { t: "在某个阳光明媚却毫无波澜的午后，一种与全世界都格格不入的虚无感，如潮水般将他吞没。", v: -0.26 },
-        { t: "当他凝视水面，突然发现水里的倒影正用一种极其陌生的嘲弄眼神看着他，自我的边界轰然倒塌。", v: -0.5 }
-    ]},
-    { text: "11. 当你在键盘上敲下全书的最后一行字时，主角的最终结局是怎样的？", dim: 1, opts: [
-        { t: "他被滚滚向前的时代洪流无情吞没，成为了宏大历史进程中一个微小却极其悲壮的注脚。", v: 0.5 },
-        { t: "一切惊心动魄归于平淡。他与那些鸡飞狗跳的羁绊和解，重新遁入琐碎却温吞的世俗日常。", v: 0.24 },
-        { t: "他决绝地背对所有人，独自遁入旷野的风雪，虽一无所有，却赢得了绝对纯粹的自由。", v: -0.26 },
-        { t: "肉身的边界不复存在。他的意识化作了漫天飞舞的尘埃，或是彻底消融于深不见底的虚无之中。", v: -0.5 }
-    ]},
-    { text: "12. 在你的文学观中，小说里配角的存在，其最大的功能究竟是什么？", dim: 1, opts: [
-        { t: "他们本身就是主角。每个人都代表着一种社会力量，共同构成时代的复调交响。", v: 1 },
-        { t: "作为一张紧密的人际网，通过他们的闲言碎语和利益纠葛，逼迫主角做出抉择。", v: 0.51 },
-        { t: "作为反衬。他们的平庸和世俗，用来凸显主角内心的清醒、痛苦与不被理解。", v: -0.49 },
-        { t: "他们可能根本不重要，甚至只是主角精神投射出的幻影或脑海中的声音。", v: -1 }
+    { text: "8. 主角在山林中迷路了，天色渐暗，他遇到了什么？", dim: 1, opts: [
+        { t: "一个同样避雨的采药人，两人结伴寻找出路。", v: 0 },
+        { t: "一座废弃的村落，他在里面度过了一个思绪万千的夜晚。", v: 0.33 },
+        { t: "听到了似乎是来路不明的呼唤，让人分不清是风声还是幻听。", v: 0.66 },
+        { t: "走进了一片看似熟悉，却在空间上循环往复的树林。", v: 1 }
     ]},
 
-    // --- 维度2：悲悯 vs 戏谑 (T vs P) ---
-    { text: "13. 当主角站在无可逃避的道德悬崖边，必须做出抉择时，你会如何安排他的命运？", dim: 2, opts: [
-        { t: "让他为了捍卫某种高贵的信仰，流着血跃下悬崖，完成一场壮烈且令人窒息的自我献祭。", v: 0.5 },
-        { t: "没有纵身一跃的决绝。他只能咽下苦果，背负起道德的污点，在无尽的愧疚中佝偻地活下去。", v: 0.24 },
-        { t: "让他用一种极其狡猾、甚至略带无赖的智力游戏绕开悬崖，借此狠狠嘲讽“崇高”本身的虚伪。", v: -0.26 },
-        { t: "他不仅跳了下去，还在半空中发现崖底不过是个巨大的充气滑垫——一切沉重的道德命题都是个笑话。", v: -0.5 }
+    // 维度2：姿态
+    { text: "9. 主角费尽心血准备的礼物，却被对方随手搁置。你会如何写这一段？", dim: 2, opts: [
+        { t: "体恤主角内心的失落，文字中带有一丝惋惜与同情。", v: 0 },
+        { t: "写主角默默收起礼物，隐忍地将负面情绪自我消化。", v: 0.33 },
+        { t: "借此描摹人际交往中的隔阂与彼此的漫不经心。", v: 0.66 },
+        { t: "客观陈述礼物被放置在角落的状态，不作任何情感附注。", v: 1 }
     ]},
-    { text: "14. 你需要描写一场葬礼。镜头缓慢推进，你会将笔墨着重落在何处？", dim: 2, opts: [
-        { t: "落在风雨中摇摇欲坠的黑伞，以及生者那无法抑制的、仿佛要将灵魂呕出的恸哭上。", v: 0.5 },
-        { t: "落在棺木入土时那一声沉闷的钝响，以及周遭如死水般麻木、令人窒息的静谧上。", v: 0.24 },
-        { t: "落在前来吊唁的亲属们那游移的眼神、假惺惺的拭泪，以及暗地里对遗产的疯狂盘算上。", v: -0.26 },
-        { t: "落在极其荒唐的意外上——比如哀乐放成了欢快的马戏团舞曲，或者死者的假发被风吹到了神父脸上。", v: -0.5 }
+    { text: "10. 小说中一个次要人物因为意外离世。你的笔调倾向于是怎样的？", dim: 2, opts: [
+        { t: "为其平淡的一生感到哀伤，在叙述中留下一段叹息。", v: 0 },
+        { t: "侧重描写这件意外给周围亲人带来的长久隐痛。", v: 0.33 },
+        { t: "记录邻里街坊短暂的议论和随后的迅速遗忘。", v: 0.66 },
+        { t: "平静地交代事件经过和善后事宜，不多做停留。", v: 1 }
     ]},
-    { text: "15. 在全书推向最高潮的段落，你最偏爱哪种“声学质感”（叙事音色）？", dim: 2, opts: [
-        { t: "如同大提琴与管风琴齐鸣的史诗交响乐：宏大、庄肃、情感饱满到令人战栗。", v: 1 },
-        { t: "如同冰冷废墟上响起的一支孤零零的芦笛：苍凉、低回、留下大片沉重的空白。", v: 0.51 },
-        { t: "如同针尖对麦芒的高智商法庭辩论：机锋频出、字字见血、充满智力碾压的快感。", v: -0.49 },
-        { t: "如同喝醉酒的荒诞派爵士乐队：随性、失控、充满嘉年华般的喧闹、怪诞与颠覆。", v: -1 }
+    { text: "11. 主角面临一个明显不公的对待，他最终决定放弃争辩。作为作者，你的态度是？", dim: 2, opts: [
+        { t: "对他的妥协抱有深切的理解，试图展现普通人的困境。", v: 0 },
+        { t: "认为这是重压下的无奈之举，也是维持生计的现实考量。", v: 0.33 },
+        { t: "借此展现这种不公背后的荒谬与环境的冷漠。", v: 0.66 },
+        { t: "仅仅将其视作一个人物性格发展到此的逻辑必然。", v: 1 }
     ]},
-    { text: "16. 历经千辛万苦，主角终于握住了他苦求的“圣杯（终极目标）”。当他低头看时：", dim: 2, opts: [
-        { t: "圣杯在他沾满鲜血的手中化为齑粉，巨大的代价换来的只有无尽的悲凉。", v: 0.5 },
-        { t: "那只是一个极其普通的破木杯。根本没有魔法，只有他自己赋予的绝望的寄托。", v: 0.24 },
-        { t: "杯底刻着“义乌制造”。他发现这整个神圣的试炼，不过是掌权者用来洗脑的一场骗局。", v: -0.26 },
-        { t: "他随手用这个圣杯砸开了一个核桃。目标一旦达成，其神圣性就立刻变得一文不值。", v: -0.5 }
-    ]},
-    { text: "17. 面对一个强大到近乎不可战胜的敌人/体制，主角的反抗姿态是？", dim: 2, opts: [
-        { t: "哪怕化作扑火的飞蛾，也要用血肉之躯撞击铁壁，用牺牲唤醒沉睡的灵魂。", v: 0.5 },
-        { t: "如同一头沉默的老黄牛，在皮鞭下死死咬紧牙关，用惊人的忍耐力熬过漫长的寒冬。", v: 0.24 },
-        { t: "绝不正面硬刚。他站在一旁，用极其恶毒、辛辣的毒舌，把敌人的愚蠢嘲笑得体无完肤。", v: -0.26 },
-        { t: "像堂吉诃德一样头顶着尿盆冲锋，他的反抗荒诞不经，却让看似坚不可摧的体制显得无比滑稽。", v: -0.5 }
-    ]},
-    { text: "18. 如果评论家必须用一句话总结你这部作品的哲学底色，你会认同？", dim: 2, opts: [
-        { t: "“在无尽的苦难与罪恶深渊中，我们依然能仰望人类灵魂那不可磨灭的高贵星光。”", v: 1 },
-        { t: "“生命不过是一场缓慢的受难，但人类终究找到了一种方式去静静地承受它。”", v: 0.51 },
-        { t: "“所有道貌岸然的文明与道德，褪去遮羞布后，不过是一地可悲又可笑的鸡毛。”", v: -0.49 },
-        { t: "“既然宇宙本身就是一个毫无意义的巨大草台班子，那我们不如尽情地大笑一场。”", v: -1 }
+    { text: "12. 当你写完一段沉重的情节，离开书桌去喝水时，你的内心感受是？", dim: 2, opts: [
+        { t: "情绪还停留在故事里，对人物的遭遇感到疲惫和恻隐。", v: 0 },
+        { t: "思考人物接下来的命运如何能在困境中得到一丝喘息。", v: 0.33 },
+        { t: "觉得刚才那段把人性的弱点剖析得还算透彻。", v: 0.66 },
+        { t: "抽离得比较快，转而思考这段情节在整体结构上是否有效。", v: 1 }
     ]},
 
-    // --- 维度3：秩序 vs 碎片 (O vs X) ---
-    { text: "19. 行至中盘，你需要一个惊天动地的“反转（Plot Twist）”。你会如何执行？", dim: 3, opts: [
-        { t: "像引爆一颗早在第一章就埋下的定时炸弹，所有的伏笔在此刻严丝合缝地闭环，让人拍案叫绝。", v: 0.5 },
-        { t: "现实并没有物理上的突变，只是主角对某件往事的认知突然发生了视角的偏移，情感被彻底颠覆。", v: 0.24 },
-        { t: "直接“掀桌子”。借旁白之口告诉读者：刚才你们看的第二卷，其实全是那个疯子捏造的谎言。", v: -0.26 },
-        { t: "突然插入一段与剧情毫不相干的物种起源史或梦境，用文体的极度断裂来摧毁读者对“连贯性”的预期。", v: -0.5 }
+    // 维度3：结构
+    { text: "13. 小说中有一条河流穿过小镇。这条河在结构上的作用是？", dim: 3, opts: [
+        { t: "贯穿始终的主轴，所有重要事件都在河岸边有逻辑地发生。", v: 0 },
+        { t: "作为时间的见证者，将不同年代的事件平稳地串联起来。", v: 0.33 },
+        { t: "承载人物特定时刻的思绪与回忆，时隐时现。", v: 0.66 },
+        { t: "只是偶尔出现在背景中，像一段没有明确起伏的白噪音。", v: 1 }
     ]},
-    { text: "20. 当你遭遇严重的“卡壳（Writer's Block）”时，你会让主角做什么来打破僵局？", dim: 3, opts: [
-        { t: "让他停下脚步，重新梳理目前的线索与资源。修复好逻辑链条，确保整个故事的承重墙不发生坍塌。", v: 0.5 },
-        { t: "让他去接触大量的真实历史档案或技术细节，用坚实的客观事实来重新锚定叙事的方向。", v: 0.24 },
-        { t: "让他直接打破“第四面墙”，在书里突然停下来，指着天空探讨“作者”为什么要这么折磨他。", v: -0.26 },
-        { t: "让他陷入彻底的疯狂或梦魇。顺着当下的极端情绪放飞自我，任由文字如洪水般把剧情带向未知。", v: -0.5 }
+    { text: "14. 写到中途，主角突然收到一封信。这封信的内容会如何影响结构？", dim: 3, opts: [
+        { t: "解开前面埋下的悬念，推动故事进入下一个转折点。", v: 0 },
+        { t: "交代一段前因后果，让当前的矛盾脉络更加清晰。", v: 0.33 },
+        { t: "打断当下的叙事，引出一段悠长但不推进主线的回忆。", v: 0.66 },
+        { t: "并没有实质内容，短暂扰乱主角的心绪后又归于平淡。", v: 1 }
     ]},
-    { text: "21. 你在书里安排了一个反复出现的意象（例如一只蓝鸟）。它是用来做什么的？", dim: 3, opts: [
-        { t: "它是整部小说的精神图腾。它的每一次出现，都精准对应着主角命运的转折与灵魂的升华。", v: 0.5 },
-        { t: "它没有强烈的象征意义。它只是一个真实存在的、用来烘托时代氛围和环境质感的背景细节。", v: 0.24 },
-        { t: "它是你故意布置的“红鲱鱼（误导线索）”。用来嘲弄那些试图在小说里过度寻找“深刻隐喻”的读者。", v: -0.26 },
-        { t: "它毫无逻辑。有时是一只鸟，有时会突然变成一个茶杯或一声尖叫，它拒绝被任何理性定义。", v: -0.5 }
+    { text: "15. 你在构思一篇小说时，通常最先确定的是什么？", dim: 3, opts: [
+        { t: "完整的故事骨架和结局的必然走向。", v: 0 },
+        { t: "人物之间的关系图谱和核心的矛盾冲突。", v: 0.33 },
+        { t: "某个特定的场景、氛围或者一段挥之不去的记忆。", v: 0.66 },
+        { t: "一种难以名状的情绪，或者几句缺乏上下文的对话。", v: 1 }
     ]},
-    { text: "22. 写到全书的最后一页，你打算给读者留下怎样的“离场感”？", dim: 3, opts: [
-        { t: "交响乐的终章。将之前所有的伏笔完美收束，给出一个确凿的、掷地有声的定论。", v: 0.5 },
-        { t: "一声绵长的叹息。核心冲突已经落幕，但人物仍在平庸中继续生活，留下一抹隽永的余韵。", v: 0.24 },
-        { t: "一个精妙的悖论。留下两个完全自洽却互相矛盾的结局，让读者在合上书后依然感到智力上的眩晕。", v: -0.26 },
-        { t: "突然的断裂。在毫无预兆的半句话中戛然而止，刻意制造一种巨大的失重感、残缺感与虚无感。", v: -0.5 }
+    { text: "16. 你要给故事收尾了。你会选择哪种方式画上句号？", dim: 3, opts: [
+        { t: "所有线索交汇，给出一个确切的交代。", v: 0 },
+        { t: "核心事件解决，但生活还在延续，留下一定的余韵。", v: 0.33 },
+        { t: "不作强行结论，在一次寻常的散步或吃饭中自然结束。", v: 0.66 },
+        { t: "在一个看似缺乏结论的节点停下，留下叙事的空白。", v: 1 }
     ]},
-    { text: "23. 你的小说在语言质感（Textual Texture）上，最接近以下哪种描述？", dim: 3, opts: [
-        { t: "精准、典雅、威严。像古罗马大教堂的石柱一样，追求长句的对称之美与语法的绝对严谨。", v: 1 },
-        { t: "质朴、利落、留白。像手术刀一样剔除所有冗余的形容词，追求“不着一字，尽得风流”的白描。", v: 0.51 },
-        { t: "繁复、华丽、充满反讽。像一个镜子迷宫，充斥着双关语、隐喻和炫技般的修辞游戏。", v: -0.49 },
-        { t: "迷狂、生猛、意识流动。像野蛮生长的热带藤蔓，打破传统的语法规范，追求最原始的感官冲击力。", v: -1 }
+
+    // 维度4：语言
+    { text: "17. 你要描写初冬的第一个清晨。你会如何组织语言？", dim: 4, opts: [
+        { t: "使用丰富的词汇，描绘寒气如何穿透衣物以及霜降的具体形态。", v: 0 },
+        { t: "描写路上行人的瑟缩和呵出的白气，借此传递季节的变化。", v: 0.33 },
+        { t: "用简单的几个短句，勾勒出萧瑟的环境轮廓。", v: 0.66 },
+        { t: "尽量简练，只交代时间和温度，然后立刻切入事件。", v: 1 }
     ]},
-    { text: "24. 在构思与创作的最深处，你觉得你在扮演一个什么角色？", dim: 3, opts: [
-        { t: "建筑师/钟表匠。我理性地规划蓝图，组装零件，掌控着这个世界运行的绝对法则。", v: 1 },
-        { t: "解剖医生/记录者。我手持冰冷的手术刀，客观、冷酷且精确地切开社会的肌理。", v: 0.51 },
-        { t: "魔术师/千王。我在字里行间设下障眼法，戴着面具嘲笑规则，享受智力操纵的快感。", v: -0.49 },
-        { t: "巫师/降神者。我在癫狂中起舞，语言不是我控制的工具，而是借我之躯降临的狂热神谕。", v: -1 }
+    { text: "18. 主角和老友久别重逢，两人在小酒馆坐下。他们的对话状态是？", dim: 4, opts: [
+        { t: "话语绵密，夹杂着对往事详细的追忆和感慨。", v: 0 },
+        { t: "充满生活气息的闲聊，不时伴随肢体动作与环境的互动。", v: 0.33 },
+        { t: "话不多，多是试探性的短句，很多情绪留在沉默里。", v: 0.66 },
+        { t: "对话干脆利落，只传递必要的信息，没有多余的寒暄。", v: 1 }
+    ]},
+    { text: "19. 书中发生了一场短暂的肢体冲突。你的描写偏向于？", dim: 4, opts: [
+        { t: "详细拆解动作的细节，以及人物当时涨烈的情绪体验。", v: 0 },
+        { t: "聚焦冲突爆发前后的紧张氛围，以及周围人的反应。", v: 0.33 },
+        { t: "弱化具体动作，通过两三个关键的视觉定格来呈现过程。", v: 0.66 },
+        { t: "只用极少数动词交代过程，语言节奏短促有力。", v: 1 }
+    ]},
+    { text: "20. 在校对自己的小说草稿时，你最常做的修改动作是？", dim: 4, opts: [
+        { t: "润色词句，寻找更准确的形容词，使语言更具张力。", v: 0 },
+        { t: "调整语序，让叙述的语气更加流畅自然。", v: 0.33 },
+        { t: "删减那些看起来不够干净利落的修饰语。", v: 0.66 },
+        { t: "剔除任何对推动情节或塑造人物没有实质帮助的字词。", v: 1 }
+    ]},
+
+    // 维度5：意义
+    { text: "21. 故事结尾，主角经历一番波折回到了原点。他的感悟更接近于？", dim: 5, opts: [
+        { t: "这一路的失去，让他懂得了某些更值得珍视的内在价值。", v: 0 },
+        { t: "接受了生活的本来面目，多了一份平静和韧性。", v: 0.33 },
+        { t: "发现此前的许多执着，其实并没有太大的实际意义。", v: 0.66 },
+        { t: "觉得这趟折腾只是顺应了自然流变，并不强求获得什么启示。", v: 1 }
+    ]},
+    { text: "22. 主角一直保留着一块旧怀表。在故事最后，这块表怎么了？", dim: 5, opts: [
+        { t: "传给了下一代，成为一种精神或记忆的延续。", v: 0 },
+        { t: "一直默默放在抽屉里，偶尔走时不太准，但一直都在。", v: 0.33 },
+        { t: "被主角以一个随意的理由典当，换了些实用物件。", v: 0.66 },
+        { t: "在某次搬家中自然遗失，主角找了几次后便顺其自然了。", v: 1 }
+    ]},
+    { text: "23. 如果有读者说，你的小说让他感到一种无力感。你的内心反应是？", dim: 5, opts: [
+        { t: "希望他能在感受到无力之后，依然看到一丝生活的光亮。", v: 0 },
+        { t: "觉得这很正常，普通人的生活原本就包含着无力感。", v: 0.33 },
+        { t: "认为这说明作品有效地剥离了那些关于美好的滤镜。", v: 0.66 },
+        { t: "觉得无力感也是真实的体验，很多事本就没有确切答案。", v: 1 }
+    ]},
+    { text: "24. 抛开具体的故事，你写作最底层的驱动力更倾向于？", dim: 5, opts: [
+        { t: "在文字中寻找或确认某种能够支撑生活的意义。", v: 0 },
+        { t: "如实地记录人世间的境遇，为生活留下一些存证。", v: 0.33 },
+        { t: "剖析和拆解那些看起来天经地义的社会观念。", v: 0.66 },
+        { t: "只是展现生存的复杂状态，不对意义作明确的判断。", v: 1 }
     ]}
 ];
 
+// 扩充至19位作家的完整坐标库
 const archetypes = {
-    // 现实阵营
-    "RCTO": {
-        name: "列夫·托尔斯泰", enName: "Leo Tolstoy", title: "宏大史诗的悲悯沙皇",
-        desc: "你是一位野心勃勃且充满道德焦虑的文学建筑师。你具有极其宏伟的全景式视野，不满足于书写个体的私密哀愁，而是渴望用如椽巨笔勾勒出整个时代的社会截面与历史洪流。你在创作与生活中都有着极强的“秩序感”和“掌控欲”，习惯居高临下地审视万物；但同时，你内心深处又沸腾着极其沉重的道德使命感与宗教般的悲悯。你试图在阶级对立与苦难的大地上，为全人类寻找一条精神救赎的通途。",
-        bio: "出生于俄国显赫贵族，拥有庞大的庄园与财富，晚年却遭遇极其深刻的精神危机。他试图放弃财产、为底层发声甚至离家出走，最终在一个凄冷的小火车站（阿斯塔波沃站）肺炎发作病逝，以近乎苦行僧的方式结束了伟大的一生。",
-        core: "全知视角与历史决定论 (Omniscient Realism)。你的叙事如同上帝的目光，严丝合缝、草蛇灰线。你深信个人的命运与时代的齿轮紧密咬合，通过构建极其庞大的社会关系网，展现人类在道德律令与世俗欲望之间的庄严受难。",
-        quote: "“幸福的家庭都是相似的，不幸的家庭各有各的不幸。” ——《安娜·卡列尼娜》",
-        recs: "📖 案头书：《战争与和平》——感受如何将历史的宏大与人性的微观完美熔铸。<br><br>🎬 观影册：《辛德勒的名单》(Schindler's List) ——在极度的苦难与庞大的社会建构中，见证人性中不可磨灭的崇高星光。"
+    "Tolstoy": {
+        name: "列夫·托尔斯泰", enName: "Leo Tolstoy", title: "宏大秩序的建筑师",
+        code: "000000", coords: [0.1, 0.1, 0.1, 0.1, 0.2, 0.1],
+        desc: "你的视野广阔，试图在作品中囊括社会各个阶层的全貌。你坚守现实主义的法则，对人类的苦难抱有深沉的悲悯。你具备强大的结构掌控力，将多条线索和众多人物编织在严密的因果网中。你的语言厚重繁复，始终在沉重的底色上，试图为人类寻找一条确切的道德建构之路。",
+        bio: "出身俄国贵族，拥有庞大庄园与社会地位。他在中年以后经历了漫长且深刻的精神危机，开始对自身的阶级属性产生怀疑。晚年试图散尽家财，践行平民化与素食主义的生活方式。这种对现实秩序的抗拒最终导致他离家出走，并在一个偏僻的火车站病逝。",
+        core: "坚持全景式的现实主义视角，将个人的命运沉浮与广阔的社会历史变迁紧密结合。在宏大的叙事框架内，注重因果逻辑的严密推演，试图在苦难与沉沦中寻找道德救赎的可能。他的文本既是社会的解剖学，也是对人类良知的持续追问。",
+        quote: "凡是让人幸福的东西，都是好的。",
+        recs: "📖 案头书：《复活》——在广阔的社会背景与严密的因果链中，探寻人物内心的道德觉醒。<br><br>🎬 观影册：《辛德勒的名单》——在极端的历史灾难中，见证对于生命价值的坚定建构。"
     },
-    "RCTX": {
-        name: "鲁迅", enName: "Lu Xun", title: "铁屋中的绝望盗火者",
-        desc: "你是一个极其清醒、极其痛苦，且对人性有着手术刀般洞察的观察者。你深植于现实的泥沼，但你的笔法却拒绝了传统的冗长铺陈，呈现出一种现代主义的破碎、冷峻与高度浓缩。面对群体的愚昧和文化的劣根性，你感到一种透彻心扉的绝望；但你的伟大之处在于“反抗绝望”——哪怕明知这是一场注定失败的悲剧，你依然选择化身匕首与投枪，用最锐利的文字刺破虚伪的铁屋。",
-        bio: "本名周树人，早年东渡日本学医，后因在幻灯片中看透了国人的麻木，毅然决定“弃医从文”。他一生笔战无数，极其钟爱抽烟与吃甜食。晚年饱受肺病折磨，却依然在病榻上写下了“一个都不宽恕”的铮铮誓言。",
-        core: "白描与象征主义的冷酷解剖 (Symbolic Realism)。你舍弃了古典主义的宏大结构，善于用碎片化的速写、极具张力的隐喻（如“吃人”、“狂人”）来瞬间撕开社会的脓疮。你的悲悯不流于眼泪，而是化作了极其冷峻的国民性批判。",
-        quote: "“绝望之为虚妄，正与希望相同……于浩歌狂热之际中寒；于天上看见深渊。” ——《野草》",
-        recs: "📖 案头书：《野草》——中国现代文学史上最深邃、最孤独的散文诗，字字带血。<br><br>🎬 观影册：《大象席地而坐》(An Elephant Sitting Still) ——在极其压抑、碎片化的社会绝境中，寻找最后一声微弱的命运嘶吼。"
+    "LaoShe": {
+        name: "老舍", enName: "Lao She", title: "市井悲喜剧的记录者",
+        code: "000010", coords: [0.1, 0.1, 0.2, 0.1, 0.8, 0.2],
+        desc: "你的目光大多投向时代变迁中的普通人群。你坚持现实主义的创作路径，对底层人物的挣扎抱有深切的同情。你习惯构建严密的叙事秩序，让人物命运在起伏的情节中得到完整的展现。你的语言生动细致，带有浓厚的生活气息，在描绘苦难时依然保留着对传统伦理和人情温度的肯定。",
+        bio: "出生于北京底层贫民家庭，早年的生活经历让他对市井百态和底层民众的生存状态有着近乎本能的熟悉。他曾赴英国任教，回国后全身心投入创作，始终坚持平民视角。在时代洪流的冲击下，他始终保持着对传统伦理和人情温度的眷恋，其一生的命运也与现当代社会的剧烈转型紧密相连。",
+        core: "致力于描绘现实主义的市井全景图，通过详实的生活细节还原特定时代的社会肌理。依靠贴近大众的语言与严密的因果链条，展现个体在不可抗拒的社会机器面前的挣扎与妥协。在刻画人物的悲喜剧时，不仅指出环境的残酷，也探讨人性内部的韧性与软弱。",
+        quote: "经验是生活的肥料，有什么样的经验便变成什么样的人。",
+        recs: "📖 案头书：《骆驼祥子》——学习如何用详实的细节和清晰的因果链条写透一个人的命运轨迹。<br><br>🎬 观影册：《茶馆》——在相对固定的空间内展现时代群像的更迭。"
     },
-    "RCPO": {
-        name: "钱锺书", enName: "Qian Zhongshu", title: "智性迷宫的毒舌绅士",
-        desc: "你拥有极高的智商、渊博的学识，以及极其敏锐的幽默感。你看透了世态炎凉和知识分子阶层的虚伪，但你绝不会为此痛哭流涕或愤怒控诉。你选择退后一步，保持一种精英式的冷眼旁观，用极其刻薄、辛辣、充满隐喻的文字去尽情嘲讽。你极其讲究行文的古典秩序与修辞美学，文学对你而言是一场盛大且精确的智力游戏。",
-        bio: "中国近代著名学者、作家，拥有惊人的记忆力与语言天赋，被誉为“文化昆仑”。他生性幽默机智，极不喜交际应酬。曾有读者读了《围城》极其仰慕想登门拜访，他幽默地在电话里回绝：“你吃了一个鸡蛋觉得味道不错，何必非要认识那只下蛋的母鸡呢？”",
-        core: "学者型讽刺与镜像解构 (Academic Satire)。你的文本结构严谨如同堡垒，但内部却装满了令人拍案叫绝的机锋与比喻。你用极其理性的态度解构了婚姻、事业、学问等一切被世俗赋予神圣光环的事物，留下一部充满冷幽默的人间喜剧。",
-        quote: "“城外的人想冲进去，城里的人想逃出来，婚姻也罢、职业也罢，人生的愿望大都如此。” ——《围城》",
-        recs: "📖 案头书：《围城》——汉语文学界将“讽刺”与“比喻”运用到极致的智性巅峰。<br><br>🎬 观影册：《方形》(The Square) ——以极其冷静、充满秩序感的镜头，无情扒下中产阶级与知识分子虚伪、荒诞的文化遮羞布。"
+    "LuXun": {
+        name: "鲁迅", enName: "Lu Xun", title: "荒原上的清醒者",
+        code: "000110", coords: [0.2, 0.1, 0.2, 0.8, 0.8, 0.2],
+        desc: "你面对世界时保持着极其清醒的审视。你关注广阔的社会现实，但通常通过刻画典型的个体来折射群体的生存状态。你摒弃温情脉脉的抚慰，但在冷峻的表象下藏着对弱者的悲悯。你的文本不拘泥于传统的完整结构，时常呈现出断裂与碎片化的特征。文字精炼克制，试图在绝境中确立一种反抗的姿态。",
+        bio: "早年曾东渡日本学习医学，后因受到现实刺痛而决定弃医从文，试图以此唤醒沉睡的社会意识。他的一生在多座城市间辗转，始终处于与各种思想潮流交锋的中心。面对动荡的时局与深重的民族苦难，他以短篇小说和杂文为工具，对国民性进行了深刻的自我剖析与批判。",
+        core: "将象征主义手法与极简的白描相结合，抛弃了长篇大论的铺陈与全知视角的说教。善于用经济的笔墨勾勒人物的灵魂特征，揭示深藏于日常生活背后的精神困境。在冷峻客观的叙述表象下，包裹着对弱者的沉痛关切以及对强权与虚伪的决不妥协。",
+        quote: "绝望之为虚妄，正与希望相同。",
+        recs: "📖 案头书：《呐喊》——观察如何用极其克制的白描撕开社会的切面。<br><br>🎬 观影册：《大象席地而坐》——体会生存的沉重与个体在绝境中发出的微弱声音。"
     },
-    "RCPX": {
-        name: "余华", enName: "Yu Hua", title: "时代荒诞的冷酷解剖师",
-        desc: "你是一个将“极度悲惨的现实”与“极度冷静的先锋笔调”完美揉捏的鬼才。你的故事背景往往扎根于极其厚重、残酷的历史洪流中，但你却放任人物在失控的命运碎片中摸爬滚打。你极度排斥在作品中进行道德说教或情感泛滥，你习惯用一种近乎残忍的客观和黑色幽默，将鲜血淋漓的生存真相直接抛给读者。你的戏谑，是对命运不公最无声的嘲笑。",
-        bio: "早年曾是一名牙医，因为受够了每天看极其反胃的口腔，为了能“去文化馆上班，不用拔牙还能在大街上晃悠”，他开始疯狂写作。他把最悲惨的苦难和死亡写进书里赚足了读者的眼泪，自己在现实生活中却是一个极其幽默开朗、金句频出的“段子手”。",
-        core: "零度情感与先锋叙事 (Zero-Degree Emotion & Avant-Garde)。你的叙事语言极度简练、平白，甚至带着一种麻木的残酷（零度叙事）。你把死亡、苦难写得极其随意又荒唐，但在这种荒谬的表象下，是你对底层人民“活着”这件事本身最原始、最深沉的敬畏。",
-        quote: "“人是为了活着本身而活着的，而不是为了活着之外的任何事物所活着。” ——《活着》",
-        recs: "📖 案头书：《许三观卖血记》——在无尽的苦难与剥削中，用近乎黑色幽默的生存哲学对抗命运。<br><br>🎬 观影册：《寄生虫》(Parasite) ——阶级社会的残酷物语，在滑稽、失控与荒诞的碎片中走向必然的血腥悲剧。"
+    "QianZhongshu": {
+        name: "钱锺书", enName: "Qian Zhongshu", title: "智性迷宫的解构者",
+        code: "001001", coords: [0.2, 0.1, 0.8, 0.2, 0.2, 0.8],
+        desc: "你以宏阔的视野审视世态炎凉。在现实的土壤上，你保持着智识阶层的冷峻旁观。文本结构严密，语言繁复考究，常常充满了深刻的隐喻与思辨。你用精妙的比喻和理性的嘲讽，无情地解构了世俗体制与人情关系中的种种虚伪。",
+        bio: "兼具深厚的传统文化底蕴与广博的西方学术视野，是中国近代少有的百科全书式学者。他生性幽默机智，对人情世故有着极其敏锐的观察力。在学术研究之外，他以有限的文学创作展现了对知识分子阶层和市井生活的洞察。一生经历了多次社会动荡，但始终保持着智识阶层的独立与清醒。",
+        core: "采用学者型的讽刺与镜像解构手法，将丰富的学识转化为对现实的深层观照。文本结构严密自洽，但在语言层面却充满了机锋与双关，形成一种独特的智性审美。通过对婚姻、事业及人际交往的细致描摹，剥离了附着在这些事物上的神圣光环，探讨生存的平庸与无奈。",
+        quote: "城外的人想冲进去，城里的人想逃出来，婚姻也罢、职业也罢，人生的愿望大都如此。",
+        recs: "📖 案头书：《围城》——汉语文学界将讽刺与比喻运用到极致的智性文本。<br><br>🎬 观影册：《方形》——以冷峻的镜头，无情扒下阶层与文化虚伪的遮羞布。"
     },
-    "RITO": {
+    "YuHua": {
+        name: "余华", enName: "Yu Hua", title: "苦难现实的旁观者",
+        code: "001110", coords: [0.2, 0.1, 0.9, 0.8, 0.9, 0.2],
+        desc: "你关注时代洪流中普通人的生存境遇。你放弃了多愁善感的抒情，以一种极度克制、甚至冷酷的视角记录苦难。你的故事通常遵循清晰的现实逻辑，但在语言上追求极致的简单与干净。你不试图在沉重的故事中寻找升华的意义，而是呈现活着本身所具有的、近乎麻木的坚韧。",
+        bio: "早年曾在家乡的卫生院从事牙医工作，因为渴望改变单调的生活轨迹而开始文学创作。他的作品风格经历了从早期的先锋探索到后期的平实写实的明显转变。作为中国当代文学的重要代表，他对时代巨变下的个体命运有着持续的关注，其人生经历与创作轨迹反映了当代社会的复杂面貌。",
+        core: "以零度情感与极简白描为核心特征，剥除了多余的情感修饰与主观价值评判。在面对极端残酷的现实困境时，采用一种近乎冷漠的客观陈述，让苦难本身直接呈现。不试图在悲剧中寻找超越性的道德升华，而是聚焦于普通人为了活着本身所展现出的、近乎麻木的坚韧。",
+        quote: "人是为了活着本身而活着的，而不是为了活着之外的任何事物所活着。",
+        recs: "📖 案头书：《活着》——学习如何用最干练的词汇和不带评判的语调讲述极度沉重的命运。<br><br>🎬 观影册：《盲井》——在极度写实和冷峻的视点中直视生存的残酷法则。"
+    },
+    "Marquez": {
+        name: "加西亚·马尔克斯", enName: "Gabriel García Márquez", title: "神话叙事的织梦者",
+        code: "010000", coords: [0.2, 0.9, 0.2, 0.2, 0.1, 0.2],
+        desc: "你的目光囊括了广袤的群像。在打破现实边界的魔幻土壤中，你以悲悯的基调构建出严密的史诗循环。你的语言繁密扎实，善于将日常与神迹自然地糅合。你试图在时间的流逝与时代的遗忘中，为人的存在与民族的记忆重新建立坐标。",
+        bio: "出生于哥伦比亚的一个偏远小镇，童年时期听祖父母讲述的民间传说与政治冲突，成为他日后创作的深厚土壤。早年从事记者工作，经历了长期的贫困与寂寥。凭借对家族记忆与拉美历史的深刻重构，他最终成为拉美文学爆炸的核心人物，并在世界范围内产生了深远影响。",
+        core: "以魔幻现实主义构建出庞大而严密的神话原型。通过打破线性的时间观念，创造出循环往复的史诗结构，将日常琐事与超现实的神迹自然糅合。用冷峻克制的笔调去书写光怪陆离的事件，试图在时间的流逝与时代的遗忘中，为人的存在与民族的苦难建立新的历史坐标。",
+        quote: "多年以后，面对行刑队，奥雷里亚诺·布恩迪亚上校将会回想起父亲带他去见识冰块的那个遥远的下午。",
+        recs: "📖 案头书：《百年孤独》——感受如何用极致的结构与从容的语调织就时间的巨网。<br><br>🎬 观影册：《潘神的迷宫》——在残酷的背景下，用暗黑童话完成对苦难的共情。"
+    },
+    "MoYan": {
+        name: "莫言", enName: "Mo Yan", title: "泥土与幻觉的狂舞者",
+        code: "010100", coords: [0.2, 0.9, 0.2, 0.8, 0.1, 0.2],
+        desc: "你的创作带有极强的生命力，视线覆盖广阔的民间群像。你不受传统现实主义物理法则的束缚，接纳梦境、志怪与感官异常。在叙事上，你任由文本在多线交织中呈现出一种狂欢化的碎片形态。语言丰沛密集，在对苦难的解构中展现出生生不息的韧性。",
+        bio: "出生于山东高密的乡村，早年关于饥饿与贫困的切身记忆，深刻影响了他的文学底色与审美倾向。他广泛汲取了民间口头文学、地方戏曲以及西方现代派文学的营养。多年的创作实践让他确立了扎根乡土却又超越乡土的独特风格，成为反映中国近现代乡村变迁的重要声音。",
+        core: "确立了幻觉现实主义的叙事体系，打破了单一的线性时间与严密的因果逻辑。以极具生命力的繁密语言和浓烈的感官意象，重建了一段充满原始冲动的民间历史。在看似狂欢化的碎片叙述中，解构了正统的历史叙事，展现出生命在苦难大地上生生不息的强健韧性。",
+        quote: "极度夸张的语言是极度沉闷的社会现实的产物。",
+        recs: "📖 案头书：《丰乳肥臀》——感受如何打破常规结构，用磅礴的笔触书写半个世纪的繁衍与变迁。<br><br>🎬 观影册：《红高粱》——体会生猛的视觉意象与不受约束的原始情感。"
+    },
+    "Orwell": {
+        name: "乔治·奥威尔", enName: "George Orwell", title: "现代铁幕的预言家",
+        code: "011011", coords: [0.1, 0.8, 0.9, 0.2, 0.9, 0.9],
+        desc: "你对宏大的社会机器保持着深刻的警惕。在超越常规现实的寓言或反乌托邦设定中，你冷眼旁观。你以极其严密的逻辑推演荒诞，并采用极简透明的语言结构文本，无情地解构了荒谬的权力谎言与体制神话。",
+        bio: "早年曾在缅甸殖民地担任警察，后来的底层流浪体验让他对帝国主义和阶级压迫产生了深刻的警醒。他积极参与社会变革实践，对极权政治与强权逻辑保持着终生的反感与批判。其短暂的一生在贫病交加中度过，但留下的作品却成为对二十世纪政治异化现象最精确的病历。",
+        core: "专注于政治寓言的构建与冷峻的逻辑推演，将文学作为揭露社会机制运行底层的解剖刀。在语言上追求窗玻璃般的透明与准确，摒弃繁杂的修辞。在超越常规现实的设定中，无情地解构了荒谬的权力谎言与体制神话，表达了对人类自由可能丧失的深层忧虑。",
+        quote: "谁控制了过去，谁就控制了未来；谁控制了现在，谁就控制了过去。",
+        recs: "📖 案头书：《1984》——用清晰冰冷的逻辑推演，包裹住最残酷的社会预言。<br><br>🎬 观影册：《妙想天开》——在高度官僚化的迷宫中进行最终的无望反抗。"
+    },
+    "Vonnegut": {
+        name: "库尔特·冯内古特", enName: "Kurt Vonnegut", title: "时空解构的旁观者",
+        code: "011111", coords: [0.2, 0.8, 0.9, 0.9, 0.8, 0.8],
+        desc: "你用超越常规的时间线来处理群体的巨大创伤。面对历史的苦难，你拒绝沉重的控诉，选择冷峻旁观和碎片化的时空拼贴。你的语言极其简练口语化，用近乎黑色的幽默彻底解构了沉重的生存意义。",
+        bio: "在第二次世界大战期间，曾作为美军战俘亲历了对德累斯顿极其惨烈的盟军大轰炸。这段在地下屠宰场中躲过劫难的荒诞经历，直接促成了他反战和黑色幽默的文学底色。战后从事过多种职业，在科技发展与现代冲突的背景下，始终保持着对人类命运的悲观与自省。",
+        core: "将黑色幽默与后现代解构手法融合，使用打乱的时间线和随意的时空拼贴来处理群体的巨大创伤。拒绝提供虚假的悲剧升华或道德说教，呈现出创伤后的无力感与生存的荒谬。语言极简且口语化，在对一切严肃意义的消解中，隐藏着对人类境况的深切关注。",
+        quote: "事情就是这样。 (So it goes.)",
+        recs: "📖 案头书：《第五屠宰场》——时间旅行与战争创伤的完美拼贴，人类创伤文学的特殊样本。<br><br>🎬 观影册：《奇爱博士》——用荒唐滑稽的黑色幽默，将人类的危机彻底解构。"
+    },
+    "Dostoevsky": {
         name: "陀思妥耶夫斯基", enName: "Fyodor Dostoevsky", title: "幽暗深渊的苦难先知",
-        desc: "你是人类幽暗心理与潜意识的绝对主宰。你对外部社会的风花雪月毫无兴趣，你的笔尖永远直指个体内心深处“神魔交战”的修罗场。你的思想架构极其宏大严密（如同神学体系），但你的文本状态却充满了极度的高热、战栗与神经质。你习惯把人物逼入绝对的绝境，剥开他们的自尊，通过极端的痛苦与罪恶，来探讨救赎、信仰与道德的终极底线。",
-        bio: "曾因涉嫌反对沙皇被判处死刑。在刑场上，绞索已经套在脖子上的最后一刻，沙皇特使策马狂奔赶到宣布改判流放西伯利亚。这段极其恐怖的濒死体验和随后四年的苦役生活，彻底重塑了他的灵魂，使他成为人类苦难与心理深渊最伟大的挖掘者。",
-        core: "复调小说与心理深度探索 (Polyphony & Psychological Depth)。你不仅是作家，更是伟大的思想家。你首创了“复调”结构，让小说中每个人物都拥有独立且平等的意识声部，彼此进行灵魂的激烈辩论。你的作品是一座在炼狱烈火中建立起来的道德审判庭。",
-        quote: "“我只担心一件事，就是我是否配得上我所受的苦难。” ——《卡拉马佐夫兄弟》",
-        recs: "📖 案头书：《罪与罚》——跟随拉斯柯尔尼科夫，在理性的狂妄与良心的战栗中走完一趟地狱之旅。<br><br>🎬 观影册：《出租车司机》(Taxi Driver) ——深入极度孤独、精神异化的现代人内心，凝视那片随时可能爆发的灵魂深渊。"
+        code: "100000", coords: [0.9, 0.2, 0.1, 0.1, 0.2, 0.1],
+        desc: "你关注个体的心理深渊。在严酷的现实背景下，你对人物精神的受难抱有极大的悲悯。你构建了严密的复调叙事，让不同的思想在文本中激烈碰撞。你的语言繁密厚重，试图在道德的审判与痛苦的追问中，为人性寻找灵魂的救赎。",
+        bio: "青年时期因参与政治活动曾经历极其恐怖的濒死体验，随后在西伯利亚度过了多年的苦役生涯。这些严酷的经历重塑了他的精神世界，使其开始深入思索信仰与道德的根基。晚年饱受疾病与债务的困扰，却在极度的焦虑中创作了多部深入探索人类心理深渊的伟大小说。",
+        core: "确立了影响深远的复调叙事结构，让持有不同思想观念的人物在文本中拥有平等发声的权利，形成激烈的思想碰撞。注重向个体心理的极深处挖掘，在严密的情节推演中展示灵魂的挣扎。语言厚重繁密，试图在道德的审判与痛苦的受难中，寻找关于信仰与救赎的确切答案。",
+        quote: "我只担心一件事，就是我是否配得上我所受的苦难。",
+        recs: "📖 案头书：《罪与罚》——在理性的狂妄与良心的战栗中走完一趟心理救赎之旅。<br><br>🎬 观影册：《出租车司机》——深入极度孤独的精神内部，凝视随时可能爆发的深渊。"
     },
-    "RITX": {
-        name: "太宰治", enName: "Osamu Dazai", title: "破碎灵魂的唯美殉道者",
-        desc: "你是一个极度敏感、将“自我解剖”推向极致的灵魂体验派。你天生缺乏融入世俗钢铁洪流的能力，对虚伪的人际交往充满恐惧。你的创作没有任何宏伟的社会企图，全是第一人称视角的喃喃自语、精神呓语和自我厌恶。你用一种极度坦诚、近乎受虐的姿态向读者敞开伤口，将生命中极致的软弱与哀愁，化作了一朵散发着毁灭气息的恶之花。",
-        bio: "本名津岛修治，出身日本青森县的首富之家。他一生五次尝试自杀（其中多次与女性殉情），最终在39岁时与情人山崎富荣在玉川上水投水自尽。他将自己一生的软弱、羞耻与绝对的颓废，全部熔铸在了绝笔之作《人间失格》中。",
-        core: "私小说与毁灭美学 (I-Novel & Aesthetics of Destruction)。你打破了小说虚构的边界，将真实的生活与文学彻底融为一体。你的叙事是碎片化的、情绪主导的，你用毁灭自我的方式，完成了对这个坚硬、冷漠世界最温柔也最绝望的抗拒。",
-        quote: "“胆小鬼连幸福都会害怕，碰到棉花都会受伤，有时还被幸福所伤。” ——《人间失格》",
-        recs: "📖 案头书：《人间失格》——剥离一切社会身份，直面生而为人的极致脆弱与羞耻感。<br><br>🎬 观影册：《离开拉斯维加斯》(Leaving Las Vegas) ——拒绝拯救，拒绝希望，以一种平静而决绝的姿态，唯美地走向自我毁灭。"
+    "ShenCongwen": {
+        name: "沈从文", enName: "Shen Congwen", title: "边城守望者",
+        code: "100110", coords: [0.8, 0.2, 0.1, 0.8, 0.8, 0.2],
+        desc: "你的创作视线常常投向边缘与微小的个体。你偏爱现实的土壤，并在其中寻找未被异化的纯粹。你对人物抱有温和的同情，不愿用严酷的戏剧冲突去折磨他们。你的文本结构松散自然，语言洗练质朴，致力于在流逝中留存人性的常态与美。",
+        bio: "青年时代曾在湘西地方军队中担任文书，亲历了军阀混战时期的残酷与生死。然而这些经历并未让他的文字变得暴戾，反而促使他在文学中寻求一种超越世俗动荡的平静与纯粹。建国后，他主动停止了小说创作，转而投入中国古代服饰和文物研究，在另一个领域延续了对美的守护。",
+        core: "确立了极具个人特征的散文化叙事风格。淡化了小说的戏剧冲突与严密的逻辑因果，转而依靠风物的细腻描绘与情绪的自然流淌来推进文本。在对边缘地区个体命运的观照中，呈现出一种近乎透明的写实，致力于在不可避免的现代消逝中留存人性的常态与温良。",
+        quote: "我只建造一座小庙，在这座小庙里，我供奉的是人性。",
+        recs: "📖 案头书：《边城》——在不着痕迹的白描中感受人事代谢的自然节奏。<br><br>🎬 观影册：《小城之春》——以散淡的结构和克制的情感展现东方特有的审美。"
     },
-    "RIPO": {
-        name: "张爱玲", enName: "Eileen Chang", title: "华袍之下的苍凉刺客",
-        desc: "你拥有极其细腻的感官和冷酷剔透的眼神。在宏大的时代车轮面前，你刻意保持着疏离感，你更关心乱世中微小个体的饮食男女、爱情算计与私密欲望。你的文字精致华丽到了极点，如同锦缎般充满古典色彩的对称与秩序之美。但在这种极致的华美之下，潜藏着你对人性、对婚姻极其透彻且悲凉的洞察。你用带刺的笔尖挑破所有浪漫主义的幻象，留下一地冷冷的月光。",
-        bio: "出身晚清名门（李鸿章是其曾外祖父），却在没落的家族阴影与父母破碎的婚姻中长大。她七岁写小说，二十出头便以绝顶才华震动上海滩。她极其钟爱奇装异服，晚年却因患有心理上的“跳蚤妄想症”，在美国深居简出，频繁搬家，最终在一间空荡荡的公寓里孤独离世。",
-        core: "市井传奇与心理现实主义 (Urban Legend & Psychological Realism)。你的文本具有电影镜头般的精准质感，擅长运用繁复的意象（如月亮、镜子、锁命的枷）来隐喻人物扭曲的心理。你用世俗的算计解构了崇高的爱情，在戏谑与华丽中透出刺骨的苍凉。",
-        quote: "“生命是一袭华美的袍，爬满了蚤子。” ——《天才梦》",
-        recs: "📖 案头书：《金锁记》——用最华丽、最恶毒的语言，描画一个被金钱和旧礼教彻底异化的扭曲灵魂。<br><br>🎬 观影册：《魅影缝匠》(Phantom Thread) ——在极度精致、充满古典秩序的华服之下，暗藏着两性关系中致命的权力博弈与病态控制。"
+    "Dazai": {
+        name: "太宰治", enName: "Osamu Dazai", title: "破碎灵魂的体验者",
+        code: "100111", coords: [0.9, 0.2, 0.2, 0.8, 0.8, 0.9],
+        desc: "你将视线向内收拢，在现实中解剖自我的软弱与敏感。文本时常呈现出情绪主导的碎片化和游离感。你用极其坦诚和简练的语言，呈现出一种对生存意义的消解与深刻的怀疑，以毁灭的姿态完成了对现实的抗拒。",
+        bio: "出身于日本偏远地区的富裕显赫家庭，却一生难以在世俗规范中找到自身的安立之处。他经历了多次内心的严重危机，对自我与周遭世界始终抱有一种无法弥合的疏离感。短暂的生命中伴随着多次走向毁灭的尝试，最终将一生的软弱与颓废熔铸在了绝笔作品之中。",
+        core: "深受私小说传统的影响，将叙事视线向内收拢，在现实中残忍地解剖自我的软弱与敏感。文本时常呈现出情绪主导的碎片化特征，缺乏宏大的社会建构企图。用极其坦诚、简练的语言，表达了对生存意义的深刻怀疑，并在某种程度上以走向虚无的姿态完成了对现实的拒绝。",
+        quote: "胆小鬼连幸福都会害怕，碰到棉花都会受伤，有时还被幸福所伤。",
+        recs: "📖 案头书：《人间失格》——剥离社会身份，直面生而为人的极致脆弱感。<br><br>🎬 观影册：《离开拉斯维加斯》——以平静而决绝的姿态，唯美地走向不可逆的消亡。"
     },
-    "RIPX": {
-        name: "弗拉基米尔·纳博科夫", enName: "Vladimir Nabokov", title: "记忆迷宫的唯美幻术师",
-        desc: "你是一个拒绝任何社会道德绑架的“绝对唯美主义者”。在你的哲学里，文学不应该承担教化天下的责任，文学的存在仅仅是为了纯粹的审美与智力愉悦。你极其厌恶庸俗的现实主义，你擅长潜入最边缘、甚至道德上极具争议的个体心理深处。你用最瑰丽、最跳跃的语言碎片，编织出一张令人眩晕的文字迷宫，在与读者的猫鼠游戏中享受智力碾压的快感。",
-        bio: "出生于俄罗斯圣彼得堡的贵族世家，十月革命后流亡欧洲，后移居美国。他不仅是一位极具天赋的双语（俄语、英语）文学大师，还是一位狂热且高度专业的鳞翅目昆虫学家（蝴蝶分类学）。为了糊口，他甚至在大学里兼任过网球和拳击教练。",
-        core: "不可靠叙事与语言炼金术 (Unreliable Narrator & Aestheticism)。你是操纵语言的暴君。你的小说充满了复杂的镜像、双关语、通感（Synesthesia）和文本游戏。你将记忆的碎片随意拼接，彻底颠覆了真实与幻觉的边界，让道德在艺术的极致美感面前显得不值一提。",
-        quote: "“洛丽塔，我生命之光，我欲念之火。我的罪恶，我的灵魂。” ——《洛丽塔》",
-        recs: "📖 案头书：《微暗的火》(Pale Fire) ——由一首诗和无数条神经质的注释构成的前卫小说，一场纯粹的后现代文本游戏。<br><br>🎬 观影册：《穆赫兰道》(Mulholland Drive) ——打碎线性的梦境与现实，在充满隐喻的视听碎片中，拼凑出个体内心最幽暗的欲望迷宫。"
+    "EileenChang": {
+        name: "张爱玲", enName: "Eileen Chang", title: "世俗幻象的拆解者",
+        code: "101001", coords: [0.8, 0.1, 0.9, 0.2, 0.1, 0.8],
+        desc: "你的叙事重心落在封闭空间内的个体关系与心理暗流。你立足于世俗现实，但用冷眼旁观的态度剥离了人情面纱。你的小说结构严谨精巧，语言繁密，善于运用细致的意象投射人物心理。你对价值建构持怀疑态度，倾向于揭示生存的苍凉与不确定。",
+        bio: "出身于晚清遗老组成的没落名门望族，早年家庭变故让她对人情冷暖与世态炎凉有着异于常人的早熟体察。二十世纪三四十年代在上海文坛凭借独特的叙事风格崭露头角，见证了时代的剧烈更迭。后半生远赴海外，深居简出，在孤独与隔绝中保持着对世俗现实的审视。",
+        core: "专注于心理现实主义的开掘，将叙事重心落在封闭空间内的个体关系与微观心理暗流。小说结构严谨精巧，语言繁密华丽，善于通过细致的物象铺陈投射人物复杂的内心变化。对宏大的价值建构持不信任态度，冷眼旁观世俗利益与情感羁绊中的真实纠葛，揭示生存底色中的苍凉。",
+        quote: "时代是仓促的，已经在破坏中，还有更大的破坏要来。",
+        recs: "📖 案头书：《金锁记》——观察如何用繁复的细节和冷酷的视角刻画人性的扭曲。<br><br>🎬 观影册：《饮食男女》——体会世俗架构下家庭关系的解体与暗流。"
     },
-
-    // 魔幻阵营
-    "SCTO": {
-        name: "加西亚·马尔克斯", enName: "Gabriel García Márquez", title: "神话叙事的织梦巨匠",
-        desc: "你是魔幻现实主义的无冕之王。在你的构思中，生与死、鬼魂与活人、现实与神话的边界被彻底抹平。你拥有一种极其庞大而循环往复的宇宙观（秩序），整个家族、甚至整个大陆的历史，在你的笔下像一个打不开的命运死结。你极少使用夸张的感叹号，而是用极度沉静、客观（甚至如同老祖母讲故事般冷漠）的语调，讲述着最光怪陆离、令人绝望的悲剧。你相信，现实远比小说更魔幻。",
-        bio: "哥伦比亚作家，拉美魔幻现实主义文学的最高代表。他早年曾穷困潦倒，在寄出《百年孤独》的书稿时，因为付不起全部的邮费，只能先寄出一半，换来定金后再寄出另一半。1982年，他凭借此书实至名归地斩获诺贝尔文学奖。",
-        core: "魔幻现实主义与神话原型 (Magical Realism & Mythic Archetypes)。你打破了线性时间，创造了“循环时间观”。你用书写日常琐事的笔调去书写神迹（如乘着床单升天的美人），又用书写神迹的笔调去揭露冰冷的政治屠杀，将一个民族的孤独与创伤化作了不朽的史诗。",
-        quote: "“多年以后，面对行刑队，奥雷里亚诺·布恩迪亚上校将会回想起父亲带他去见识冰块的那个遥远的下午。” ——《百年孤独》",
-        recs: "📖 案头书：《百年孤独》——感受如何用极致的结构与从容的语调，织就一张没有出口的时间巨网。<br><br>🎬 观影册：《潘神的迷宫》(Pan's Labyrinth) ——在残酷的法西斯战争背景下，用暗黑的童话与魔幻元素，完成对人类苦难最深沉的共情。"
+    "WangZengqi": {
+        name: "汪曾祺", enName: "Wang Zengqi", title: "寻常烟火的拾遗者",
+        code: "101110", coords: [0.8, 0.2, 0.8, 0.9, 0.9, 0.2],
+        desc: "你将目光聚焦于凡夫俗子的日常生活。你扎根于具体的现实经验，对笔下人物怀有平视的宽容与客观。你不追求强烈的戏剧冲突和严密的结构，文本往往随性自然。你的语言洗练平淡，致力于在粗糙的现实中提取出具有恒久价值的人性微光与趣味。",
+        bio: "曾师从沈从文，在西南联大度过了自由而充实的求学时光。建国后经历了多次政治运动的波折，甚至一度被下放劳动，却始终保持着平和旷达、不卑不亢的心境。晚年迎来创作的高峰期，在小说和散文中留下了大量对生活细节、风土人情的珍视与刻画，成为当代文学史上的独特存在。",
+        core: "秉持生活流的叙事美学，将目光聚焦于凡夫俗子平淡的日常生活。刻意弱化了强烈的矛盾冲突，淡化了主线情节的起伏，依靠寻常的对话和动作细节来推动文本发展。语言洗练平淡，致力于在粗糙甚至艰难的现实中，提取出具有恒久价值的人性微光与日常趣味。",
+        quote: "散文的产生，是因为人需要和人交流。小说也是散文。",
+        recs: "📖 案头书：《受戒》——体会如何在没有强烈冲突的日常切片中，展现人性的纯粹。<br><br>🎬 观影册：《一一》——在缓慢的生活节奏和家庭琐事中观察生命的流转。"
     },
-    "SCTX": {
-        name: "莫言", enName: "Mo Yan", title: "幻觉现实的狂舞者",
-        desc: "你的创作充满了一股泥石流般不可阻挡的原始生命力。你不受任何古典结构的束缚，叙事如同喷薄的狂流。在你的笔下，历史的惨烈与民间的神鬼狐妖、六道轮回交织在一起，构成了一场泥沙俱下的感官狂欢。鲜血、欲望、泥土在你的文本中翻滚，你展现出一种野蛮生长、令人目眩神迷的史诗感。你用最奔放的想象力，书写了人类在苦难大地上的生生不息。",
-        bio: "本名管谟业，出生于山东高密。童年时因为极度贫困和饥饿，甚至吃过煤块和树皮。因为性格外向话太多常惹麻烦，父母便让他“莫言”（不要说话），他索性以此为笔名。2012年，他成为首位获得诺贝尔文学奖的中国籍作家。",
-        core: "幻觉现实主义与民间狂欢 (Hallucinatory Realism & Folk Carnivalization)。你将巴赫金的“狂欢化”理论运用到了极致。打破雅与俗的界限，用极其繁复、色彩浓烈、近乎感官过载的语言，撕开了正统历史的伪装，让民间的声音以最粗粝、最生猛的方式嘶吼出来。",
-        quote: "“高粱红成瘆人的血海。这里是人类最美丽的故乡，也是最丑陋的故乡。” ——《红高粱家族》",
-        recs: "📖 案头书：《生死疲劳》——通过六道轮回的荒诞视角，极其生猛地串联起中国半个世纪的乡村群像变迁。<br><br>🎬 观影册：《地下》(Underground, 库斯图里卡执导) ——用极其癫狂、魔幻、充满吉普赛铜管乐的嘉年华形式，讲述一个国家在战火中四分五裂的巨大悲剧。"
+    "Nabokov": {
+        name: "弗拉基米尔·纳博科夫", enName: "Vladimir Nabokov", title: "记忆迷宫的构建者",
+        code: "101101", coords: [0.8, 0.1, 0.8, 0.9, 0.1, 0.9],
+        desc: "你对世俗道德保持着冷峻的距离，视线聚焦于个体的内部体验。在现实的基础上，你热衷于打破常规逻辑，构建游离的叙事迷宫。你的语言繁复华丽，充满智性与修辞的隐喻，致力于在纯粹的审美游戏中解构固有的意义。",
+        bio: "出生于俄罗斯圣彼得堡的贵族世家，十月革命后被迫流亡欧洲，随后移居美国。除了作为享有国际声誉的双语文学巨匠，他也是一位在学术界受到认可的蝴蝶分类学家。这种跨越不同文化与学科的经历，造就了他兼具理智与唯美、极其注重文本独立性与艺术性的创作理念。",
+        core: "将不可靠叙事与高超的修辞技巧结合，构建出复杂的文本迷宫。对世俗道德或社会教化保持着冷峻的距离，视线聚焦于个体的内部体验与记忆碎片的重组。语言繁复华丽，充满智性的隐喻，致力于在纯粹的审美游戏中，颠覆真实与幻觉的边界，解构固有的现实意义。",
+        quote: "文学不是思想的载体，而是语言的狂欢。",
+        recs: "📖 案头书：《微暗的火》——体验一场由诗歌与注释构成的前卫文本游戏。<br><br>🎬 观影册：《穆赫兰道》——在充满隐喻的视听碎片中，拼凑出内心的幽暗迷宫。"
     },
-    "SCPO": {
-        name: "乔治·奥威尔", enName: "George Orwell", title: "极权铁幕下的冷峻预言家",
-        desc: "你是极权主义永远的梦魇。你用荒诞的设定（如动物造反的农场、被真理部控制的未来社会），构建了一个逻辑严密到令人窒息的恐怖秩序。你笔调极度冷静、充满政治讽刺，但在戏谑的外表下，藏着你对人类自由沦丧的深深恐惧。你拥有极强的社会学洞察力，你不仅仅是在写小说，你是在为全人类可能坠入的深渊写下一份精确的病历与墓志铭。",
-        bio: "本名埃里克·亚瑟·布莱尔，早年曾在缅甸当过大英帝国的警察，后因极度厌恶帝国主义而辞职。他甚至主动跑到巴黎和伦敦的底层做洗碗工、流浪汉，只为了体验最真实的贫困。他的作品精准预言了20世纪的极权恐怖，但他自己却英年早逝于肺结核。",
-        core: "政治寓言与反乌托邦建构 (Political Allegory & Dystopian Construction)。你的语言追求如“窗玻璃”般的透明与准确。你极其深刻地揭示了“语言如何被权力重塑（新语）”以及“记忆如何被体制篡改”。你的小说是一把直刺意识形态谎言的冰冷解剖刀。",
-        quote: "“谁控制了过去，谁就控制了未来；谁控制了现在，谁就控制了过去。” ——《1984》",
-        recs: "📖 案头书：《动物农场》——用最极简、荒诞的童话外壳，包裹住20世纪最残酷的政治背叛史。<br><br>🎬 观影册：《妙想天开》(Brazil) ——在高度秩序化、官僚化的极权迷宫中，用黑色幽默与荒诞的幻想进行最终的无望反抗。"
+    "Kafka": {
+        name: "弗兰兹·卡夫卡", enName: "Franz Kafka", title: "现代困境的预言家",
+        code: "110011", coords: [0.9, 0.8, 0.2, 0.1, 0.9, 0.9],
+        desc: "你的探讨深入到个体在面对体制与外界时的无力。你常常设定一个脱离现实常理的荒诞起点，但随后以极度严密的逻辑进行推演。你怀抱对弱者的悲悯，但语言干练极简，像公文一般毫无修饰。你的作品揭示了秩序背后的荒谬与生存的虚无。",
+        bio: "生前在布拉格的一家工伤保险机构担任小职员，业余时间在深夜进行创作，生前作品几乎未获世人关注。对强权父亲的深层畏惧，以及作为少数族裔在文化认同上的困境，贯穿了他的一生。临终前曾嘱托朋友烧毁所有手稿，后因朋友的违背才使得这些描绘现代人精神危机的作品得以留存。",
+        core: "专注于异化与荒诞的逻辑演绎。常常设定一个脱离现实常理的起点，随后以极度严密、刻板的逻辑进行推演。语言极其干练极简，像公文陈述一般毫无情感修饰。通过客观的白描手法，揭示了现代组织结构与无形权力网络背后的荒谬，以及个体在此困境中的极度压抑与虚无。",
+        quote: "目的虽有，却无路可走；我们称之为路的东西，不过是彷徨而已。",
+        recs: "📖 案头书：《变形记》——研究如何用冷酷笔触，将荒诞设定写得无比真实。<br><br>🎬 观影册：《人生切割术》——观察现代组织结构对个体精神的剥削与异化。"
     },
-    "SCPX": {
-        name: "库尔特·冯内古特", enName: "Kurt Vonnegut", title: "时空解构的黑色幽默顽童",
-        desc: "你的脑洞突破了天际，是个彻头彻尾的黑色幽默大师。面对人类历史上最惨烈的集体创伤（如战争屠杀）和现代社会的荒谬，你拒绝使用传统的沉重叙事来“煽情”。你选择打碎时间，让主角在不同的时空、甚至外星人基地中随意穿梭。你用一种漫不经心、极其随意的态度，解构了不可承受的生命之痛，在令人捧腹的笑声中留下了一把最苦涩的辛酸泪。",
-        bio: "二战期间曾作为美军士兵被德军俘虏。1945年，他被关押在德累斯顿的一个地下屠宰场里，却因此奇迹般地侥幸躲过了盟军对德累斯顿极其惨烈的地毯式大轰炸。这段如地狱般的荒诞经历，直接促成了他最著名的反战巨著《第五屠宰场》。",
-        core: "黑色幽默与后现代创伤解构 (Black Humor & Postmodern Deconstruction)。你使用“精神分裂式”的时间线和元小说技巧，拒绝给读者提供虚假的悲剧净化（Katharsis）。你用口头禅式的“事情就是这样”来应对巨大的死亡，这并非冷漠，而是创伤后极度的无力与终极的悲悯。",
-        quote: "“事情就是这样。 (So it goes.)” ——《第五屠宰场》",
-        recs: "📖 案头书：《第五屠宰场》——时间旅行、外星动物园与德累斯顿大轰炸的完美拼贴，人类创伤文学的奇葩。<br><br>🎬 观影册：《奇爱博士》(Dr. Strangelove) ——用极其荒唐、滑稽的黑色幽默，将足以毁灭全人类的核战争危机彻底解构。"
+    "Woolf": {
+        name: "弗吉尼亚·伍尔夫", enName: "Virginia Woolf", title: "意识流动的潜游者",
+        code: "110100", coords: [0.9, 0.8, 0.1, 0.9, 0.1, 0.1],
+        desc: "你沉入个体的意识深海。你打破了线性的时间与现实事件的束缚，采用游离的结构捕捉瞬间的思绪碎片。你以悲悯的底色和繁密诗意的语言，试图在流动的意识中建构起个体的精神家园，细腻地描摹了生存的孤独与连接。",
+        bio: "英国现代主义文学的重要先驱，布卢姆茨伯里文化圈的核心人物。她天生极其敏感，一生在精神的剧烈波动中艰难寻找内心的确切秩序。积极参与当时的文化探讨与女性权利启蒙，但在常年的躁郁困扰下，最终选择以投水的方式结束了生命，将其自身化作了意识的波流。",
+        core: "致力于意识流与心理绵延的文本探索。打破了传统的线性时间与外在物理事件的束缚，采用游离的结构捕捉人物瞬间的思绪碎片。语言繁密、细腻且充满诗意，摒弃了传统的情节驱动。试图在流动的内心独白中，细腻地描摹生存的孤独感，并在精神层面建构起个体的庇护所。",
+        quote: "一个人能使自己成为自己，比什么都重要。",
+        recs: "📖 案头书：《海浪》——感受没有具体情节，内心独白如波浪般交织的纯粹文本。<br><br>🎬 观影册：《时时刻刻》——用极细腻的意识流动编织面对虚无时的抗争。"
     },
-    "SITO": {
-        name: "弗兰兹·卡夫卡", enName: "Franz Kafka", title: "现代性荒诞的孤独先知",
-        desc: "你是现代人精神焦虑的完美代言人。你的故事设定极度荒诞绝伦（如一觉醒来变成巨大的甲虫，或因莫须有的罪名被无休止地审判），但故事展开的逻辑、细节的描写，却极其冰冷、严密、甚至充满官僚文书般的繁琐（秩序）。你专注于描写个体在面对巨大、无形、不可理喻的体制或父权法则时，那种深深的无力感。你的小说，是一座没有出口的现代精神迷宫。",
-        bio: "生前只是一名普通的布拉格工伤保险公司职员，业余时间疯狂写作，一生都笼罩在极度严厉强势的父亲的阴影下。他生前默默无闻，临终前嘱咐挚友马克斯·布罗德烧毁自己所有的手稿。幸运的是，布罗德违背了遗嘱，将这些手稿出版，直接震惊了整个西方文坛。",
-        core: "存在主义异化与迷宫隐喻 (Existential Alienation & Metaphor of Labyrinth)。你揭示了现代社会最大的恐怖：法律与权力是悬空的，目的虽然存在，却永远找不到抵达的道路。你以一种极其冷酷、悖论式的理性，精准描摹了人类在宇宙中无家可归的绝对绝望。",
-        quote: "“目的虽有，却无路可走；我们称之为路的东西，不过是彷徨而已。” ——《卡夫卡随笔》",
-        recs: "📖 案头书：《城堡》——用极度精密、烦琐的公文式语言，书写一个人永远无法融入体制与社会的终极疲惫。<br><br>🎬 观影册：《人生切割术》(Severance) ——现代企业体制的极致异化，冷酷的秩序与极其荒谬的个体生存困境。"
+    "Kundera": {
+        name: "米兰·昆德拉", enName: "Milan Kundera", title: "存在之轻的思辨者",
+        code: "111001", coords: [0.8, 0.8, 0.9, 0.2, 0.2, 0.9],
+        desc: "你在个体的境遇中探讨历史与生存的荒谬。在现实与超现实交织的背景下，你保持智性的冷峻与距离感。你的结构严密如同乐章，语言繁杂多义，时常穿插哲学思辨。你在轻松戏谑的语调中完成了对沉重历史与媚俗意义的解构。",
+        bio: "出身捷克，在经历了国家的政治动荡与思想钳制后流亡法国，并逐渐开始用法语进行思考与创作。他极其注重作家的个人隐私，坚信作家应当完全隐藏在作品的背后，避免外界将个人生活与文学创作过度捆绑。他以纯粹的文本与世界对话，对现代欧洲的历史与文化有着深邃的反思。",
+        core: "将哲理思辨引入小说的复调解构之中。在现实与超现实交织的背景下，拒绝让小说沦为真理的附庸或道德的传声筒。结构严密如同乐章，语言繁杂多义，时常打破第四面墙进行议论。在轻与重、必然与偶然的悖论中展示复杂性，以轻松戏谑的语调解构了沉重的历史与媚俗意义。",
+        quote: "压倒她的不是重，而是不能承受的生命之轻。",
+        recs: "📖 案头书：《不能承受的生命之轻》——将政治与思辨融合，用轻盈文字解剖沉重存在。<br><br>🎬 观影册：《法兰西特派》——在高度对称的美学结构中，书写戏谑又忧伤的离散。"
     },
-    "SITX": {
-        name: "弗吉尼亚·伍尔夫", enName: "Virginia Woolf", title: "意识流动的深海潜游者",
-        desc: "你是打破传统小说时间轴的先锋。在你的眼中，现实世界的客观物理时间是虚假的，个体精神内部的时间才是真实的。你完全摒弃了充满戏剧冲突的故事主线，转而用极其细腻、诗意、如网状般发散的“意识流”碎片，去捕捉灵魂中瞬间的闪念与深沉的哀愁。阅读你的作品，读者必须放弃理性的推导，如同在一条流动的精神河流中泅渡。",
-        bio: "英国著名的布卢姆茨伯里派的核心人物，现代主义文学先驱。她天生极度敏感，一生饱受躁郁症与幻听的折磨。1941年，为了不拖累深爱自己却日渐憔悴的丈夫，她在口袋里装满石头，平静地走入了家附近的乌斯河，永远化作了意识的波流。",
-        core: "意识流与心理绵延 (Stream of Consciousness & Psychological Duration)。你深受柏格森“绵延”哲学的影响。通过“自由间接引语”，你极其敏锐地捕捉落在脑海中的无数原子般的印象，展现了生命的脆弱、瞬息万变以及人与人之间极其微弱却动人的精神微光。",
-        quote: "“一个人能使自己成为自己，比什么都重要。” ——《一间自己的房间》",
-        recs: "📖 案头书：《海浪》——没有具体情节，六个角色的内心独白如海浪般交织、重叠，极致的诗意文本。<br><br>🎬 观影册：《时时刻刻》(The Hours) ——跨越三个时空，用极其细腻的意识流动和情感碎片，编织出女性面对生存虚无时的抗争与妥协。"
+    "WangXiaobo": {
+        name: "王小波", enName: "Wang Xiaobo", title: "荒诞现实的游吟者",
+        code: "111100", coords: [0.8, 0.8, 0.8, 0.9, 0.2, 0.2],
+        desc: "你极度关注个体在体制与平庸下的精神自由。在充满想象力的超现实设定中，你以冷峻又戏谑的态度打碎了传统的线性结构。你的语言生动繁密，充满智趣的火花，在看似荒诞的文本狂欢中建构起了一个诗意的精神避难所。",
+        bio: "早年曾有过知青插队与工人的经历，后赴美留学，兼具理科生严密的逻辑推演能力与文人极具想象力的浪漫气质。他一生追求智慧与趣味的解放，反对任何形式的思想禁锢。其作品在生前未获足够重视，但在其突发心脏病英年早逝后，迅速在当代中国文坛产生了深远而持久的启蒙影响。",
+        core: "创立了独具一格的狂欢化叙事与智性反叛风格。在充满想象力的超现实设定中，以冷峻又戏谑的态度打碎了传统的线性逻辑。语言生动繁密，充满智趣的火花，用荒诞消解严肃。在看似混乱的文本拼贴中，探讨个体在体制与平庸下的精神处境，建构起了一个自由的诗意世界。",
+        quote: "一个人只拥有此生此世是不够的，他还应该拥有诗意的世界。",
+        recs: "📖 案头书：《万寿寺》——打破小说边界，主角在失忆中重构历史传奇的思维狂欢。<br><br>🎬 观影册：《低俗小说》——打乱时间线，用戏谑与拼贴完成对传统叙事的颠覆。"
     },
-    "SIPO": {
-        name: "米兰·昆德拉", enName: "Milan Kundera", title: "存在之轻的复调哲人",
-        desc: "你是一个将“哲理思辨”与“轻盈叙事”完美结合的结构大师。你笔下的个体常常面临荒诞的历史境遇，但你从不流于沉重的哭喊，也极度警惕任何形式的“媚俗（Kitsch）”。你习惯使用音乐般的“复调”结构，多线交织，并且常常打破第四面墙，在小说中随时停下来进行迷人的哲学议论。你用一种轻盈、戏谑的态度，解构了历史的崇高，探讨了记忆与遗忘。",
-        bio: "捷克裔法国籍作家。1968年“布拉格之春”后，他的作品在捷克遭到全面封杀。为了追求自由的创作环境，他流亡法国并最终改用法语写作。他极其注重个人隐私，晚年几乎拒绝了所有媒体的采访，坚信“作家应该完全躲在作品的背后”。",
-        core: "哲理小说与媚俗解构 (Philosophical Novel & Deconstruction of Kitsch)。你继承了欧洲的小说传统，拒绝让小说沦为表达某种真理的工具。你的叙事充满了极其精巧的七乐章结构，在轻与重、灵与肉、偶然与必然的对立悖论中，展现了人类境况的复杂性。",
-        quote: "“压倒她的不是重，而是不能承受的生命之轻。” ——《不能承受的生命之轻》",
-        recs: "📖 案头书：《不能承受的生命之轻》——将政治、性爱、哲学思辨完美融为一体，用极其轻盈的文字解剖沉重的存在。<br><br>🎬 观影册：《法兰西特派》(The French Dispatch) ——在高度秩序化、对称化的美学结构中，用戏谑、轻盈且略带忧伤的笔调，书写个体的浪漫与离散。"
-    },
-    "SIPX": {
-        name: "王小波", enName: "Wang Xiaobo", title: "荒诞铁皮屋的浪漫骑士",
-        desc: "你是一个在荒诞现实中追求绝对精神自由的骑士。你的想象力天马行空，极其厌恶一切板起脸来的道德说教和僵化的思想禁锢。你的小说结构常常彻底粉碎线性逻辑，各种时空、第一人称的叙事随意穿梭、颠倒。你用最反叛的戏谑、最生猛的原始欲望、和极其浪漫的黑色幽默，向平庸的世界竖起了中指。你是智慧与趣味的绝对拥趸。",
-        bio: "曾做过知青、工人、老师，后来赴美留学并获得匹兹堡大学硕士学位。他兼具极其严密的理工科逻辑与极其浪漫的文人气质，甚至自己用汇编语言写过中文输入法。1997年，他因心脏病突发英年早逝，死后他的作品才开始在中国引发了狂热的“小波热”。",
-        core: "狂欢化叙事与智性反叛 (Carnivalesque Narrative & Intellectual Rebellion)。你是一位披着痞子外衣的理性主义者。你的“碎片”不是绝望的破碎，而是为了打破极权话语而刻意制造的狂欢迷宫。你用极其有趣的逻辑推导荒谬，在无趣的现实之上，构建了一个自由翱翔的诗意世界。",
-        quote: "“一个人只拥有此生此世是不够的，他还应该拥有诗意的世界。” ——《万寿寺》",
-        recs: "📖 案头书：《万寿寺》——彻底打破小说边界，主角在失忆中随意篡改唐朝的传奇，一场思维与文字的极致狂欢。<br><br>🎬 观影册：《低俗小说》(Pulp Fiction) ——环形结构、打乱的时间线、充满废话却极具张力的对白，用戏谑与拼贴完成对传统叙事的彻底颠覆。"
+    "TheUnknown": {
+        name: "未命名手稿", enName: "The Unnamed Manuscript", title: "独立坐标系的探索者",
+        code: "XXXXXX", coords: [0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
+        desc: "你在既有的 64 种二元分化中难以被简单的标签所定义。你或许在关注宏大变迁的同时使用了极简的语言，又或者在严密的结构中解构了所有的意义。这种没有落入成熟窠臼的特质，意味着你正在融合不同的叙事维度，摸索一种完全属于你自己的、处于混沌与新生之间的声音。",
+        bio: "这是一个仍在生长的文学履历，没有既定的轨迹可以依循。你的经历或许平凡，或许充满波折，但这些都被你吸收为观察世界的养分。每一次在书桌前的停顿、斟酌与推倒重来，每一次对现实的审视与记录，都在书写这段尚无定论的生平。你拒绝被轻易归类，正在探索一条属于自己的道路。",
+        core: "展现出一种在混沌中重组坐标的游离特征。不依赖单一的理论框架，而是根据具体的题材和当下的直觉，灵活调动各种截然不同的文学手法。或许在宏大叙事中运用极简的克制，或许在严密的结构中完成对价值的彻底解构。这是一种正在探索边界、拒绝定型的动态叙事能力。",
+        quote: "写作就是用自己独有的方式，给世界上那些没有名字的事物命名。",
+        recs: "📖 案头书：一本空白的笔记本。不需要向任何人借取视点，写下你今天观察到的最精确的细节。<br><br>🎬 观影册：走出房间，去观察一条你从未走过的街道。"
     }
 };
 
-// 状态管理
 let currentQ = 0;
-// scores [Dim0(R/S), Dim1(C/I), Dim2(T/P), Dim3(O/X)]
-let scores = [0, 0, 0, 0];
+let scores = [0, 0, 0, 0, 0, 0];
 let history = []; 
 
 function startTest() {
     document.getElementById('page-intro').style.display = 'none';
     document.getElementById('page-test').style.display = 'flex';
     currentQ = 0;
-    scores = [0, 0, 0, 0];
+    scores = [0, 0, 0, 0, 0, 0];
     history = [];
     renderQ();
 }
 
 function renderQ() {
     const q = questions[currentQ];
-    
-    // 进度条
     const progress = ((currentQ + 1) / questions.length) * 100;
     document.getElementById('progress-bar').style.width = progress + '%';
     document.getElementById('q-counter').innerText = (currentQ + 1).toString().padStart(2,'0') + " / " + questions.length;
 
-    // 动画刷新
     const qBox = document.getElementById('q-box');
     qBox.classList.remove('slide-up');
     void qBox.offsetWidth; 
@@ -757,18 +640,60 @@ function showLoading() {
 }
 
 function calcResult() {
-    // 现实(R,>0) vs 魔幻(S) | 群像(C,>0) vs 个体(I) | 悲悯(T,>0) vs 戏谑(P) | 秩序(O,>0) vs 碎片(X)
-    let code = "";
-    code += scores[0] > 0 ? "R" : "S";
-    code += scores[1] > 0 ? "C" : "I";
-    code += scores[2] > 0 ? "T" : "P";
-    code += scores[3] > 0 ? "O" : "X";
+    // 归一化至 0~1 区间 (每维度4题，若皆选1则总分4，此处直接除以4)
+    let userCoords = scores.map(s => s / 4);
+    
+    // 生成用户的 6 位二进制特征码（ >= 0.5 记为 1，否则记为 0）
+    let userCodeStr = userCoords.map(v => v >= 0.5 ? '1' : '0').join('');
+    
+    let exactMatch = null;
+    let bestMatch = null;
+    let maxSim = -1;
 
-    const res = archetypes[code];
-    renderResult(res, scores);
+    for (const [key, author] of Object.entries(archetypes)) {
+        if (key === "TheUnknown") continue;
+        
+        let diffSum = 0;
+        let resonanceCount = 0;
+        
+        for (let i = 0; i < 6; i++) {
+            diffSum += Math.abs(userCoords[i] - author.coords[i]);
+            // 判断特定维度上是否为同阵营
+            let userSide = userCoords[i] >= 0.5 ? '1' : '0';
+            if (userSide === author.code[i]) resonanceCount++;
+        }
+        
+        let sim = 1 - (diffSum / 6);
+        
+        if (author.code === userCodeStr) {
+            exactMatch = author;
+            exactMatch.sim = sim;
+            exactMatch.resonance = resonanceCount;
+        }
+        
+        if (sim > maxSim) {
+            maxSim = sim;
+            bestMatch = author;
+            bestMatch.sim = sim;
+            bestMatch.resonance = resonanceCount;
+        }
+    }
+
+    // 算法逻辑：优先寻找编码绝对吻合的精确匹配，若无精确匹配（空值），则调用相近度最高的最佳匹配
+    let resultData = exactMatch ? exactMatch : bestMatch;
+    let finalSimPercent = Math.round(resultData.sim * 100);
+    let resonanceText = `${resultData.resonance}/6`;
+
+    // 彩蛋触发机制
+    if (finalSimPercent < 60) {
+        resultData = archetypes["TheUnknown"];
+        resonanceText = "独立轨迹";
+    }
+
+    renderResult(resultData, userCoords, finalSimPercent, resonanceText, exactMatch !== null);
 }
 
-function renderResult(res, rawScores) {
+function renderResult(res, userCoords, sim, resCountText, isExact) {
     document.getElementById('page-loading').style.display = 'none';
     document.getElementById('page-result').style.display = 'block';
 
@@ -776,16 +701,24 @@ function renderResult(res, rawScores) {
     document.getElementById('res-name').innerText = res.name;
     document.getElementById('res-title').innerText = res.title;
     
+    let matchTypeStr = isExact ? "精确匹配" : "相近测算";
+    
+    if (res.name === "未命名手稿") {
+        document.getElementById('res-sim').innerText = `坐标解析异常 | 灵魂共振：${resCountText}`;
+    } else {
+        document.getElementById('res-sim').innerText = `${matchTypeStr}度：${sim}% | 灵魂共振：${resCountText} 维度`;
+    }
+    
     document.getElementById('res-desc').innerHTML = res.desc;
     document.getElementById('res-bio').innerHTML = res.bio;
     document.getElementById('res-core').innerHTML = res.core;
     document.getElementById('res-quote').innerText = res.quote;
     document.getElementById('res-recs').innerHTML = res.recs;
 
-    drawRadar(rawScores);
+    drawDodecagonRadar(userCoords);
 }
 
-function drawRadar(rawScores) {
+function drawDodecagonRadar(u) {
     const canvas = document.getElementById('radarChart');
     const ctx = canvas.getContext('2d');
     const dpr = window.devicePixelRatio || 1;
@@ -796,41 +729,34 @@ function drawRadar(rawScores) {
     ctx.scale(dpr, dpr);
 
     const cx = w / 2;
-    const cy = h / 2 + 10;
-    const r = Math.min(w, h) / 2.5;
-    const sides = 8;
+    const cy = h / 2;
+    const r = Math.min(w, h) / 3; 
+    const sides = 12;
 
-    // 每维度4道实战(最大0.5)，2道理论(最大1.0)，总计满分绝对值为 4.0
-    // 将其映射到 0~1 的区间：(rawScore + 4) / 8
-    const vR = (rawScores[0] + 4) / 8;
-    const vS = (4 - rawScores[0]) / 8;
-    const vC = (rawScores[1] + 4) / 8;
-    const vI = (4 - rawScores[1]) / 8;
-    const vT = (rawScores[2] + 4) / 8;
-    const vP = (4 - rawScores[2]) / 8;
-    const vO = (rawScores[3] + 4) / 8;
-    const vX = (4 - rawScores[3]) / 8;
+    const values = [
+        u[0], 1 - u[1], u[2], 1 - u[3], u[4], 1 - u[5],
+        1 - u[0], u[1], 1 - u[2], u[3], 1 - u[4], u[5]
+    ];
+    
+    const labels = [
+        "个体(私密)", "现实(经验)", "冷峻(旁观)", "秩序(严密)", "极简(白描)", "建构(价值)",
+        "群像(宏大)", "超越(幻觉)", "悲悯(共情)", "游离(碎片)", "繁密(修辞)", "解构(虚无)"
+    ];
 
-    // 顶点对应：现实, 群像, 悲悯, 秩序, 魔幻, 个体, 戏谑, 碎片
-    const values = [vR, vC, vT, vO, vS, vI, vP, vX];
-    const labels = ["现实(白描)", "群像(社会)", "悲悯(共情)", "秩序(建筑)", "魔幻(超脱)", "个体(内视)", "戏谑(解构)", "碎片(狂流)"];
-
-    // 绘制雷达底网 (偏棕色的羊皮纸墨线)
-    ctx.strokeStyle = 'rgba(139, 69, 19, 0.2)';
+    ctx.strokeStyle = 'rgba(139, 69, 19, 0.15)';
     ctx.lineWidth = 1;
     for(let i=1; i<=4; i++) {
         ctx.beginPath();
         for(let j=0; j<sides; j++) {
             const angle = (Math.PI*2/sides)*j - Math.PI/2;
             const radius = (r/4)*i;
-            if(j==0) ctx.moveTo(cx + Math.cos(angle)*radius, cy + Math.sin(angle)*radius);
+            if(j===0) ctx.moveTo(cx + Math.cos(angle)*radius, cy + Math.sin(angle)*radius);
             else ctx.lineTo(cx + Math.cos(angle)*radius, cy + Math.sin(angle)*radius);
         }
         ctx.closePath();
         ctx.stroke();
     }
     
-    // 绘制对角线
     for(let j=0; j<sides/2; j++) {
         ctx.beginPath();
         const a1 = (Math.PI*2/sides)*j - Math.PI/2;
@@ -840,48 +766,44 @@ function drawRadar(rawScores) {
         ctx.stroke();
     }
 
-    // 绘制数据多边形
     ctx.beginPath();
     for(let j=0; j<sides; j++) {
         const angle = (Math.PI*2/sides)*j - Math.PI/2;
-        let val = 0.15 + values[j] * 0.85; 
+        let val = 0.1 + values[j] * 0.9; 
         ctx.lineTo(cx + Math.cos(angle)*r*val, cy + Math.sin(angle)*r*val);
     }
     ctx.closePath();
-    ctx.fillStyle = 'rgba(159, 18, 57, 0.18)'; // 凝血暗红透明色
+    ctx.fillStyle = 'rgba(159, 18, 57, 0.18)'; 
     ctx.fill();
     ctx.strokeStyle = '#9f1239';
-    ctx.lineWidth = 2.5;
+    ctx.lineWidth = 2;
     ctx.stroke();
 
-    // 绘制端点圆圈
     for(let j=0; j<sides; j++) {
         const angle = (Math.PI*2/sides)*j - Math.PI/2;
-        let val = 0.15 + values[j] * 0.85; 
+        let val = 0.1 + values[j] * 0.9; 
         ctx.beginPath();
-        ctx.arc(cx + Math.cos(angle)*r*val, cy + Math.sin(angle)*r*val, 4, 0, Math.PI*2);
-        ctx.fillStyle = '#f4ecd8'; // 填入底色
+        ctx.arc(cx + Math.cos(angle)*r*val, cy + Math.sin(angle)*r*val, 3.5, 0, Math.PI*2);
+        ctx.fillStyle = '#f4ecd8'; 
         ctx.fill();
         ctx.stroke();
     }
 
-    // 绘制文本标签
     ctx.fillStyle = '#44403c';
-    ctx.font = 'bold 12px sans-serif';
+    ctx.font = 'bold 11px sans-serif';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     
     for(let j=0; j<sides; j++) {
         const angle = (Math.PI*2/sides)*j - Math.PI/2;
-        const dist = r + 24;
+        const dist = r + (j%6 === 0 ? 18 : 26); 
         ctx.fillText(labels[j], cx + Math.cos(angle)*dist, cy + Math.sin(angle)*dist);
     }
 }
 </script>
-
 <!-- 
   =======================================================
-  🔒 网页防伪提示锁 (米大师定制版)
+  🔒 网页防伪提示锁 (米大师定制版) - 移动端完美适配版
   使用说明：
   1. 修改 MAX_USES 为限制的次数（默认6次）。
   2. 将代码粘贴到网页文件的 </body> 标签之前。
@@ -894,8 +816,11 @@ function drawRadar(rawScores) {
         position: fixed; top: 0; left: 0; right: 0; bottom: 0;
         background: #ffffff;
         z-index: 2147483647;
-        display: flex; flex-direction: column; justify-content: center; align-items: center;
-        padding: 20px; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
+        display: flex; flex-direction: column; 
+        /* 【修复 1】移除 justify-content: center; 改为允许垂直滚动 */
+        overflow-y: auto; 
+        padding: 40px 20px; /* 增加上下 padding 防止贴边 */
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
         transition: opacity 0.5s;
     }
     
@@ -904,8 +829,12 @@ function drawRadar(rawScores) {
         border-radius: 24px; 
         box-shadow: 0 15px 50px rgba(0,0,0,0.08); text-align: center;
         border: 1px solid #fff5f7; 
+        /* 【修复 2】使用 margin: auto 进行安全的垂直居中。屏幕太小时会自动顶对齐并允许滚动 */
+        margin: auto;
         position: relative;
         overflow: hidden;
+        /* 【修复 3】严格控制盒模型，防止 padding 撑破容器 */
+        box-sizing: border-box; 
     }
     
     /* 视图切换容器 */
@@ -914,6 +843,7 @@ function drawRadar(rawScores) {
         flex-direction: column;
         align-items: center;
         animation: fadeIn 0.4s ease;
+        width: 100%;
     }
     .view-container.active {
         display: flex;
@@ -960,6 +890,10 @@ function drawRadar(rawScores) {
         font-size: 15px; font-weight: bold; cursor: pointer; 
         transition: all 0.2s; margin-bottom: 12px;
         border: none; outline: none;
+        /* 【修复 4】确保按钮自身尺寸计算包含 padding */
+        box-sizing: border-box;
+        display: flex; align-items: center; justify-content: center; flex-wrap: wrap;
+        line-height: 1.4;
     }
     .action-btn:active { transform: scale(0.98); }
 
@@ -1005,14 +939,14 @@ function drawRadar(rawScores) {
             </div>
             
             <button class="action-btn btn-primary" onclick="switchView('view-cover')">
-                对，确认无误，就是<span style="font-size: 18px; font-weight: 900; color: #ffe895; text-shadow: 0 1px 3px rgba(0,0,0,0.2);">心理米大师</span>
+                对，确认无误，就是<span style="font-size: 18px; font-weight: 900; color: #ffe895; text-shadow: 0 1px 3px rgba(0,0,0,0.2); margin-left: 4px;">心理米大师</span>
             </button>
             <button class="action-btn btn-secondary" onclick="switchView('view-warning')">
                 好像不是，可能是别的店铺
             </button>
         </div>
 
-        <!-- ================= 视图2：正版欢迎页 (去掉了密码框) ================= -->
+        <!-- ================= 视图2：正版欢迎页 ================= -->
         <div class="view-container" id="view-cover">
             <div class="avatar-wrapper">😻</div>
             <div class="gate-title">米大师的私密测试空间</div>
@@ -1056,7 +990,7 @@ function drawRadar(rawScores) {
 
 <script>
     // ================= 配置区域 =================
-    const MAX_USES = 6;                // 同一台设备限制的次数
+    const MAX_USES = 10;                // 同一台设备限制的次数
     // ==========================================
 
     const pageId = window.location.pathname; // 区分不同页面的缓存
